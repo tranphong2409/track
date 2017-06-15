@@ -1,0 +1,96 @@
+/*
+    Theme Name:   Enfold - Track
+    Template:     enfold
+*/
+
+@import url("../enfold/style.css");
+@import url("css/style.css");
+/* =Theme customization starts here
+-------------------------------------------- */
+
+
+
+/* #Media Queries
+================================================== */
+	/* fix bug Enfold template */
+	.pagination .pagination-meta{display: block;text-align: right;float:none;} 
+	#comments span.required{display: inline;}
+	.comment_text i,.comment_text cite,.comment_text em{font-style: italic;}
+	.responsive #scroll-top-link{display: block;}
+	#commentform label{left:0;position: relative;padding-bottom:5px;}
+    #header_meta{background: #fff;}
+#header .top-menu ul{margin:0;}
+#header .header-information li p{line-height: 20px;}
+#header_main,#header_meta, #header_main_alternate, .avia-section{border: 0 none;}
+#main-menu .avia-bullet, #main-menu .avia-menu-fx{display: none;}
+#header #main-menu .mm-container .search-form{position: relative;top:5px;width: 307px;padding-left: 75px;}
+#header #main-menu .mm-container .search-form #s{background: none; border: 0 none;color:#fff;font-size:14px; line-height: 22px; }
+#header #main-menu .mm-container .search-form .button{background: transparent; }
+#top #searchform .ajax_search_response{    border: 1px solid #ccc; background: #fff;}
+#slideshow.front .track-box .quote .input-field .text-box{margin: 0;}
+.u-border .special-heading-border{display: block !important;}
+.u-border .special-heading-border .special-heading-inner-border{border-width:2px;margin: 0; opacity: 1; }
+#services-box {background: #fab804;}
+.counter-number .avia-single-number, .yellow h2, .yellow{color:#fab804 !important;}
+.counter-number{margin-bottom:50px;}
+.counter-number.av-border-cells .flex_cell{border-left-style: dashed;}
+.counter-number.av-border-cells .flex_cell:first-child{border:0 none;}
+#about-box .flex_column.av_one_fourth{border-left: 1px dashed #000;}
+#about-box .av_one_fourth.first{border: 0 none;}
+.sp-title{height: 156px; border:2px solid #000 !important; position: relative;color:#fab804;line-height: 156px; text-align: center;border-radius: 10px; font-size: 30px;}
+.sp-num{position: absolute; background: #000; color:#fff; left: -30px;top:-30px;height: 65px; width: 65px; font-size: 30px; font-weight: bold;line-height: 65px; border-radius: 50%;}
+#footer a{text-decoration: none;}
+#testimonials{background: url(images/bg-quotes.jpg) center top no-repeat; background-size: cover; background-attachment: fixed;}
+#feature{background: url(images/bg-feature.jpg) center top no-repeat; background-size: cover; background-attachment: fixed;}
+._copyright{color:#fab804;}
+#quotes{padding: 100px 0;}
+#quotes .color-underline{background: url('images/ico_underline.jpg') left bottom no-repeat transparent; padding-bottom: 30px; margin-bottom: 10px;}
+#quotes .container{
+    width:900px;
+    padding: 10px 190px;
+    background: #fff;
+    border:1px solid #ccc;
+}
+#breadcrumb{background: #fab804; height: 50px; line-height: 50px; color: #fff;min-height: 50px;}
+#quotes .container .text-box{width:100%; background: #fff !important;}
+#quotes .container button{background: #fab804; width: 180px; height: 42px; color:#fff; border: 0 none;}
+#gg-map .container{width: 100% !important;max-width: 100% !important;padding:0 !important;}
+.grid-cells{width:1200px; margin: 0 auto;}
+.contact-form input[type='text'],.contact-form input[type='email'],.contact-form textarea{background: #fff !important;}
+.contact-form .button{margin: 0 auto; width:150px; text-transform: uppercase; display: block;}
+.contact-form .form_element {
+    margin-bottom: 25px;
+}
+body{font-family: "utm_avoregular", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif !important;}
+	/* large screens with 1140px with */
+	@media only screen and (min-width: 1140px)  {
+
+	}
+
+
+	/* Smaller than standard 960 (devices and browsers) */
+	@media only screen and (max-width: 989px) {
+
+	}
+
+
+	/* Tablet Portrait size to standard 960 (devices and browsers) */
+	@media only screen and (min-width: 768px) and (max-width: 989px) {
+
+	}
+
+	/* All Mobile Sizes (devices and browser) */
+	@media only screen and (max-width: 767px) {
+
+ 	}
+
+	/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+	@media only screen and (min-width: 480px) and (max-width: 767px) {
+
+	}
+
+	/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
+	@media only screen and (max-width: 479px) {
+
+
+	}

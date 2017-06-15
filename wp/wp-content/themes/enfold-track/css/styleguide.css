@@ -1,0 +1,25 @@
+.m-color {
+  height: 140px;
+  margin-bottom: 20px;
+}
+
+.m-color--color1 {
+  background-color: #cc4a14;
+}
+
+.m-color--color2 {
+  background-color: #99583d;
+}
+
+.m-color--color3 {
+  background-color: #ff0000;
+}
+
+.m-color--color4 {
+  background-color: #40ff40;
+}
+
+.m-color--color5 {
+  background-color: #54cc14;
+}
+/*# sourceMappingURL=styleguide.css.map */

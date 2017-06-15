@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+// Variables
+@import "_base/vars";
+
+.m-color {
+  height: 140px;
+  margin-bottom: 20px;
+
+  &--color1 {
+    background-color: $color1;
+  }
+
+  &--color2 {
+    background-color: $color2;
+  }
+
+  &--color3 {
+    background-color: $color3;
+  }
+
+  &--color4 {
+    background-color: $color4;
+  }
+
+  &--color5 {
+    background-color: $color5;
+  }
+}

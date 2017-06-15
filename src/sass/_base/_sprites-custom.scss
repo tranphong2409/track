@@ -1,0 +1,13 @@
+// Generate sprites
+@import 'sprites';
+
+[class^=sprite] {
+  display: inline-block;
+  vertical-align: middle;
+
+  &:hover {
+    @extend .sprite--active !optional;
+  }
+}
+
+@include sprites($spritesheet-sprites);

@@ -1,0 +1,20 @@
+@import "_header";
+
+.l-main {
+  @include outer-container;
+  max-width:1200px;
+  margin-top: 25px;
+  padding: 0 ($gutter / 2);
+
+  &__article {
+    @include media($tablet-large-min) {
+      @include span-columns(8);
+    }
+  }
+
+  &__aside {
+    @include media($tablet-large-min) {
+      @include span-columns(4);
+    }
+  }
+}
