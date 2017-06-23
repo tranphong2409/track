@@ -384,12 +384,11 @@ array(
 				
 				$output .= "<div class='avia-testimonial {$class}' $markup>";
 				$output .= "<div class='avia-testimonial_inner'>";
-	if($grid)   $output .= $avatar;
+	if(!$grid)   $output .= $avatar;
 				$output .= 		"<div class='avia-testimonial-content {$this->content_class}'  {$this->content_styling} {$markup_text}>";
 				$output .= 		ShortcodeHelper::avia_apply_autop(ShortcodeHelper::avia_remove_autop($content));
-				$output .= 		"</div>";
 				$output .= 			"<div class='avia-testimonial-meta'><div class='avia-testimonial-arrow-wrap'><div class='avia-arrow'></div></div>";
-	if(!$grid)  $output .=  $avatar;
+//	if(!$grid)  $output .=  $avatar;
 				$output .= 				"<div class='avia-testimonial-meta-mini'>";
 	if($name)	$output .= 					"<strong  class='avia-testimonial-name'  {$this->title_styling} {$markup_name}>{$name}</strong>";
 if($subtitle)	$output .= 					"<span  class='avia-testimonial-subtitle {$this->subtitle_class}' {$this->title_styling}  {$markup_job}>{$subtitle}</span>";
@@ -397,6 +396,7 @@ if($subtitle)	$output .= 					"<span  class='avia-testimonial-subtitle {$this->s
 	if($link)	$output .= 					" &ndash; <a class='aviablank avia-testimonial-link' href='{$link}' >{$linktext}</a>";
 				$output .= 				"</div>";
 				$output .= 			"</div>";
+                $output .= 		"</div>";
 				$output .= "</div>";
 				$output .= "</div>";
 
