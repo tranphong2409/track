@@ -105,6 +105,41 @@
 .news-menu ul li a{border-left-color:#f7f8fa; padding: 0 20px;}
 .news-menu ul li a:hover, .news-menu ul li:hover a{border-left-color:#fff;color:#fff;}
 .news-menu ul li:hover{background:#fab804; }
+.tracking-info .timer.iconlist_title{float:left;width:160px;text-align: right; padding-right:10px;}
+.tracking-info .iconlist_title{padding-bottom: 10px;}
+.tracking-info .avia-icon-list .iconlist-timeline{left: 195px;}
+.track-searchbox .track{
+    height: 85px;
+    width: 100%;
+    border: 4.5px solid #fab704;
+    background: transparent;
+}
+.track-searchbox .track button {
+    height: 100%;
+    width: 38%;
+    border: 0 none;
+    color: #fff;
+    text-align: center;
+    background-color: #fab704;
+    float: left;
+}
+.track-searchbox .track .input-field {
+    width: 62%;
+    float: left;
+    background: transparent;
+    border: 0 none;
+}
+.track-searchbox .track .input-field .text-box {
+    width: 100%;
+    background: transparent;
+    padding: 0 5px;
+    border: 0 none;
+    color: #fff;
+    text-align: center;
+    height: 77px;
+    line-height: 100%;
+}
+
 body{font-family: "utm_avoregular", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif !important;}
 	/* large screens with 1140px with */
 	@media only screen and (min-width: 1140px)  {
