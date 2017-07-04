@@ -139,7 +139,21 @@
     height: 77px;
     line-height: 100%;
 }
+.track-box select.text-box{
+    color:#919191 !important;
+    text-align-last: center; text-align: center;
+    -ms-text-align-last: center;
+    -moz-text-align-last: center; text-align-last: center;
+}
+.track-box  button#bt_get_quote {
+    height: 75px !important;
+}
 
+.quote-popup{max-width: 650px;margin: 0 auto; background: #fff; padding: 20px;position: relative;}
+.quote-popup tr, .quote-popup th, .quote-popup td {
+    border: 0 none !important;
+}
+.quote-popup .modal-title{padding-bottom: 10px; border-bottom: 1px solid #fab804;}
 body{font-family: "utm_avoregular", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif !important;}
 	/* large screens with 1140px with */
 	@media only screen and (min-width: 1140px)  {

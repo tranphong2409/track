@@ -30,7 +30,18 @@ function avia_append_search_nav ( $items, $args )
     return $items;
 }
 
+function get_zone(){
+    global $wpdb;
+    $zones = $wpdb->get_results( 'SELECT DISTINCT name FROM wp_track_zones ORDER BY name', OBJECT );
+    return $zones;
+}
+
 function slideshow_shortcode() {
+    $zones = get_zone();
+    $zone_option= '';
+    foreach($zones as $zone){
+        $zone_option .= '<option value="'.$zone->name.'">'.$zone->name.'</option>';
+    }
     return '
         <div class="track">
             <button>Track & Trace</button>
@@ -38,17 +49,54 @@ function slideshow_shortcode() {
                 <input class="text-box" type="text" placeholder="Enter your tracking number" />
             </div>
         </div>
-        <div class="quote">
-            <div class="input-field">
-                <input class="text-box" type="text" placeholder="Destination" />
-                <input class="text-box" type="text" placeholder="Weight" />
-                <input class="text-box" type="text" placeholder="Document" />
-            </div>
-            <button>Get a Quote</button>
+        <div class="quote" >
+            <form action="" id="quote-form">
+                <div class="input-field">
+                    <select class="text-box" name="dest">
+                        <option value="">Destination</option>
+                        ' . $zone_option . '
+                        <option value="Yemen">Yemen</option>
+                    </select>
+                    <input class="text-box" type="text" name="weight" placeholder="Weight" />
+                    <select class="text-box" name="type">
+                        <option value="1">Document</option>
+                        <option value="2">Parcel</option>
+                    </select>
+                </div>
+                <button id="bt_get_quote">Get a Quote</button>
+            </form>
         </div>
     ';
 }
 add_shortcode('home_slideshow', 'slideshow_shortcode');
+
+function quote_shortcode(){
+    $zones = get_zone();
+    $zone_option= '';
+    foreach($zones as $zone){
+        $zone_option .= '<option value="'.$zone->name.'">'.$zone->name.'</option>';
+    }
+    return '
+    <div class="quote">
+        <form action="" id="quote-form">
+            <div class="input-field">
+                <select class="text-box" name="dest">
+                        <option value="">Destination</option>
+                        ' . $zone_option . '
+                        <option value="Yemen">Yemen</option>
+                    </select>
+                <input class="text-box" type="text" name="weight" placeholder="Weight">
+                <select class="text-box" name="type">
+                        <option value="1">Document</option>
+                        <option value="2">Parcel</option>
+                    </select>
+            </div>
+            <button id="bt_get_quote">Get a Quote </button> <span style="padding-left:20px"> <i class="yellow"> * </i> Your detail will be maintained confidentially</span>
+            </form>
+        </div>
+    ';
+}
+add_shortcode('quote_box', 'quote_shortcode');
 
 function slideshow2_shortcode() {
     return '
@@ -161,5 +209,50 @@ function archive_count_span($links) {
     return $links;
 }
 
+//ajax
+
+function wpdocs_theme_name_scripts() {
+    wp_enqueue_script( 'my-script', get_stylesheet_directory_uri() . '/script.js', array('jquery'), '1.0.0', true );
+    wp_localize_script( 'my-script', 'ajax_object',
+        array( 'ajax_url' => admin_url( 'admin-ajax.php' )) );
+}
+add_action( 'wp_enqueue_scripts', 'wpdocs_theme_name_scripts' );
+
+
+add_action( 'wp_ajax_get_price_by_filter', 'get_price_by_filter' );
+add_action( 'wp_ajax_nopriv_get_price_by_filter', 'get_price_by_filter' );
+
+function get_price_by_filter(){
+    $args = $_POST['args'];
+    $data = array(
+       'error'=> false,
+       'txt' => '',
+       'dest' => $args['dest'],
+       'weight' => $args['weight'] ? $args['weight'] . ' Kg' : $args['weight'],
+       'type' => $args['type'] == 1 ? 'Document' : 'Parcel' ,
+       'val' => null
+    );
+    if($args['dest'] == "" || $args['weight'] == "" || $args['type'] ==""){
+        $data['txt'] = "something went wrong, please try again later";
+        $data['error'] = true;
+    }else{
+        $args['weight'] > 2 ? $args['type'] = 2 : $args['type'] = 1;
+        $data['val'] = get_zone_info($args['dest'],$args['weight'],$args['type']);
+    }
+    echo json_encode($data);
+    die();
+}
+
+
+function get_zone_info($zone_name,$weight,$type){
+    global $wpdb;
+    $results = null;
+    if($zone_name && $weight && $type){
+        $query = "SELECT DISTINCT p.*,z.day_time, s.name FROM wp_track_price as p JOIN wp_track_zones as z ON z.group_id = p.group_id AND z.service_type = p.services_id JOIN wp_track_services as s ON s.id = p.services_id "
+                ."WHERE z.name LIKE '".$zone_name."' AND p.kg_min < ".$weight." AND p.kg_max >= ".$weight ." AND p.goods_id = ".$type;
+        $results = $wpdb->get_results( $query, OBJECT );
+    }
+    return $results;
+}
 
 ?>
