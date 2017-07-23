@@ -13,6 +13,13 @@ add_theme_support('avia_template_builder_custom_css');
 add_filter( 'wp_nav_menu_items', 'avia_append_search_nav', 10, 2 );
 add_filter( 'avf_fallback_menu_items', 'avia_append_search_nav', 10, 2 );
 
+global $wp;
+$current_url = home_url(add_query_arg(array(),$wp->request));
+if($_SERVER['REQUEST_URI'] == '/vi/'){
+    wp_redirect( '/vi/trang-chu/' );
+    exit;
+}
+
 function avia_append_search_nav ( $items, $args )
 {
     if(avia_get_option('header_searchicon','header_searchicon') != "header_searchicon") return $items;
@@ -44,26 +51,25 @@ function slideshow_shortcode() {
     }
     return '
         <div class="track">
-            <button>Track & Trace</button>
+            <button>'.__("Track & Trace").'</button>
             <div class="input-field">
-                <input class="text-box" type="text" placeholder="Enter your tracking number" />
+                <input class="text-box" type="text" placeholder="'.__("Enter your tracking number").'" />
             </div>
         </div>
         <div class="quote" >
             <form action="" id="quote-form">
                 <div class="input-field">
                     <select class="text-box" name="dest">
-                        <option value="">Destination</option>
+                        <option value="">'.__("Destination").'</option>
                         ' . $zone_option . '
-                        <option value="Yemen">Yemen</option>
                     </select>
-                    <input class="text-box" type="text" name="weight" placeholder="Weight" />
+                    <input class="text-box" type="text" name="weight" placeholder="'.__("Weight").'" />
                     <select class="text-box" name="type">
-                        <option value="1">Document</option>
-                        <option value="2">Parcel</option>
+                        <option value="1">'.__("Document").'</option>
+                        <option value="2">'.__("Parcel").'</option>
                     </select>
                 </div>
-                <button id="bt_get_quote">Get a Quote</button>
+                <button id="bt_get_quote">'.__("Get a Quote").'</button>
             </form>
         </div>
     ';
@@ -80,18 +86,17 @@ function quote_shortcode(){
     <div class="quote">
         <form action="" id="quote-form">
             <div class="input-field">
-                <select class="text-box" name="dest">
-                        <option value="">Destination</option>
+                    <select class="text-box" name="dest">
+                        <option value="">'.__("Destination").'</option>
                         ' . $zone_option . '
-                        <option value="Yemen">Yemen</option>
                     </select>
-                <input class="text-box" type="text" name="weight" placeholder="Weight">
-                <select class="text-box" name="type">
-                        <option value="1">Document</option>
-                        <option value="2">Parcel</option>
+                    <input class="text-box" type="text" name="weight" placeholder="'.__("Weight").'" />
+                    <select class="text-box" name="type">
+                        <option value="1">'.__("Document").'</option>
+                        <option value="2">'.__("Parcel").'</option>
                     </select>
             </div>
-            <button id="bt_get_quote">Get a Quote </button> <span style="padding-left:20px"> <i class="yellow"> * </i> Your detail will be maintained confidentially</span>
+            <button id="bt_get_quote">'.__("Get a Quote").'</button> <span style="padding-left:20px"> <i class="yellow"> * </i> '.__("Your detail will be maintained confidentially").'</span>
             </form>
         </div>
     ';
@@ -173,7 +178,7 @@ function vcomment_list_func( $atts ) {
                     <div class="item-content">
                         <h3 class="title"><a href="'.get_permalink($post->ID).'" >'.$post->post_title.'</a></h3>
                         <div id="content'.$post->ID.'">'.apply_filters('the_excerpt', $post->post_excerpt).'</div>
-                        <a class="readmore" href="'.get_permalink($post->ID).'">Read more</a>
+                        <a class="readmore" href="'.get_permalink($post->ID).'">'.__("Read more").'</a>
                     </div>
                     <div class="clr"></div>
                  </div>';
@@ -229,7 +234,7 @@ function get_price_by_filter(){
        'txt' => '',
        'dest' => $args['dest'],
        'weight' => $args['weight'] ? $args['weight'] . ' Kg' : $args['weight'],
-       'type' => $args['type'] == 1 ? 'Document' : 'Parcel' ,
+       'type' => $args['type'] == 1 ? __('Document') : __('Parcel') ,
        'val' => null
     );
     if($args['dest'] == "" || $args['weight'] == "" || $args['type'] ==""){

@@ -1,5 +1,4 @@
-<?php 
-
+<?php
 $responsive		= avia_get_option('responsive_active') != "disabled" ? "responsive" : "fixed_layout";
 $headerS 		= avia_header_setting();
 $social_args 	= array('outside'=>'ul', 'inside'=>'li', 'append' => '');
@@ -25,7 +24,7 @@ if($headerS['header_topbar'] == true)
 {
 ?>
 		<div id='header_meta' class='container_wrap container_wrap_meta <?php echo avia_header_class_string(array('header_social', 'header_secondary_menu', 'header_phone_active'), 'av_'); ?>'>
-		
+
 			      <div class='container'>
 			      <?php
 			            /*
@@ -94,7 +93,7 @@ if($headerS['header_topbar'] == true)
         if($headerS['header_position'] != "header_top") do_action('ava_main_header_sidebar');
 		?>
 	
-				 <div class='container'>
+				 <div class='container abc'>
 				 
 					<div class='inner-container'>
 						<?php
@@ -113,9 +112,9 @@ if($headerS['header_topbar'] == true)
                         ?>
                         <div class="header-information">
                             <ul>
-                                <li><div class="icon"><img src="/images/icon/ico_phone.gif" alt="Call us"></div><div><p>Call us on</p><p class="main-info">+84 944 484 584</p></div></li>
-                                <li><div class="icon"><img src="/images/icon/ico_mail.gif" alt="Mail us"></div><div><p>Mail us</p><p class="main-info"><a href="mailto:info@foco.com.vn">info@foco.com.vn</a></p></div></li>
-                                <li><div class="icon"><img src="/images/icon/ico_clock.gif" alt="Working Hours"></div><div><p>Working Hours</p><p class="main-info">Mon - Sat: 8:00 - 18:00</p></div></li>
+                                <li><div class="icon"><img src="/images/icon/ico_phone.gif" alt="Call us"></div><div><p><?php printf(__('Call us on')); ?></p><p class="main-info">+84 944 484 584</p></div></li>
+                                <li><div class="icon"><img src="/images/icon/ico_mail.gif" alt="Mail us"></div><div><p><?php printf(__("Mail us")) ?></p><p class="main-info"><a href="mailto:info@foco.com.vn">info@foco.com.vn</a></p></div></li>
+                                <li><div class="icon"><img src="/images/icon/ico_clock.gif" alt="Working Hours"></div><div><p><?php printf(__("Working Hours")) ?></p><p class="main-info"><?php printf(__("Mon - Sat: 8:00 - 18:00")) ?></p></div></li>
                             </ul>
                         </div>
                         <?php

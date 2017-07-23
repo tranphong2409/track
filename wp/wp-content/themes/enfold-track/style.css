@@ -20,10 +20,14 @@
 	#commentform label{left:0;position: relative;padding-bottom:5px;}
     #header_meta{background: #fff;}
 #header .top-menu ul{margin:0;}
-#header .header-information li p{line-height: 20px;}
+#header .header-information li p{line-height: 20px;font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}
 #header_main,#header_meta, #header_main_alternate, .avia-section{border: 0 none;}
 #main-menu .avia-bullet, #main-menu .avia-menu-fx{display: none;}
-#header #main-menu .mm-container .search-form{position: relative;top:5px;width: 307px;padding-left: 75px;}
+#header #main-menu .mm-container{width:100%;}
+#header .top-menu .menu-link li:last-child a::after{
+    content:"";
+}
+#header #main-menu .mm-container .search-form{position: relative;top:5px;width: 266px;padding-left: 75px;}
 #header #main-menu .mm-container .search-form #s{background: none; border: 0 none;color:#fff;font-size:14px; line-height: 22px; }
 #header #main-menu .mm-container .search-form .button{background: transparent; }
 #top #searchform .ajax_search_response{    border: 1px solid #ccc; background: #fff;}
@@ -64,7 +68,7 @@
 .contact-form .form_element {
     margin-bottom: 25px;
 }
-
+#main-menu .noMobile{float:right !important;}
 
 #top .av-large-testimonial-slider.avia-testimonial-wrapper .avia-testimonial{padding:0;}
 #top .av-large-testimonial-slider.avia-testimonial-wrapper .avia-testimonial .avia-testimonial-image{width:160px; height: 160px; background: #fff; margin-right: 40px;}
