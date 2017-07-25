@@ -37,6 +37,40 @@ function avia_append_search_nav ( $items, $args )
     return $items;
 }
 
+
+/*
+ * CUSTOM GLOBAL VARIABLES
+ */
+
+
+function add_global_custom_options()
+{
+    add_options_page('Custom Options', 'Custom Options', 'manage_options', 'functions','global_custom_options');
+}
+add_action('admin_menu', 'add_global_custom_options');
+
+function global_custom_options()
+{
+    ?>
+    <div class="wrap">
+        <h2>Global Custom Options</h2>
+        <form method="post" action="options.php">
+            <?php wp_nonce_field('update-options') ?>
+            <p><strong>Mã danh mục tiếng anh:</strong><br />
+                <input type="text" name="en_categories" size="45" value="<?php echo get_option('en_categories'); ?>" />
+            </p>
+            <p><strong>Mã danh mục tiếng việt:</strong><br />
+                <input type="text" name="vn_categories" size="45" value="<?php echo get_option('vn_categories'); ?>" />
+            </p>
+            <p><input type="submit" name="Submit" value="Lưu" /></p>
+            <input type="hidden" name="action" value="update" />
+            <input type="hidden" name="page_options" value="en_categories,vn_categories" />
+        </form>
+    </div>
+<?php
+}
+
+
 function get_zone(){
     global $wpdb;
     $zones = $wpdb->get_results( 'SELECT DISTINCT name FROM wp_track_zones ORDER BY name', OBJECT );
@@ -141,6 +175,118 @@ add_action('init', 'ava_googlemaps_apikey');
 
 
 
+
+function custom_post_type() {
+
+// Set UI labels for Custom Post Type
+    $labels = array(
+        'name'                => _x( 'Service', 'Post Type General Name', 'twentythirteen' ),
+        'singular_name'       => _x( 'Service', 'Post Type Singular Name', 'twentythirteen' ),
+        'menu_name'           => __( 'Service', 'twentythirteen' ),
+        'parent_item_colon'   => __( 'Parent Service', 'twentythirteen' ),
+        'all_items'           => __( 'All Services', 'twentythirteen' ),
+        'view_item'           => __( 'View Service', 'twentythirteen' ),
+        'add_new_item'        => __( 'Add New Service', 'twentythirteen' ),
+        'add_new'             => __( 'Add New', 'twentythirteen' ),
+        'edit_item'           => __( 'Edit Service', 'twentythirteen' ),
+        'update_item'         => __( 'Update Service', 'twentythirteen' ),
+        'search_items'        => __( 'Search Service', 'twentythirteen' ),
+        'not_found'           => __( 'Not Found', 'twentythirteen' ),
+        'not_found_in_trash'  => __( 'Not found in Trash', 'twentythirteen' ),
+    );
+
+
+
+// Set other options for Custom Post Type
+
+    $args = array(
+        'label'               => __( 'Service', 'twentythirteen' ),
+        'description'         => __( 'Description', 'twentythirteen' ),
+        'labels'              => $labels,
+        // Features this CPT supports in Post Editor
+        'supports'            => array( 'title', 'editor',   'thumbnail' ),
+        /* A hierarchical CPT is like Pages and can have
+        * Parent and child items. A non-hierarchical CPT
+        * is like Posts.
+        */
+        'rewrite' => array('slug' => 'Service'),
+        'hierarchical'        => false,
+        'public'              => true,
+        'show_ui'             => true,
+        'show_in_menu'        => true,
+        'show_in_nav_menus'   => true,
+        'show_in_admin_bar'   => true,
+        'menu_position'       => 5,
+        'can_export'          => true,
+        'has_archive'         => true,
+        'exclude_from_search' => false,
+        'publicly_queryable'  => true,
+        'capability_type'     => 'page',
+        'taxonomies'          => array( 'Service-type' ),
+    );
+
+    // Set other options for Custom Post Type
+
+
+    // Registering your Custom Post Type
+    register_post_type( 'Services', $args );
+
+}
+
+/* Hook into the 'init' action so that the function
+* Containing our post type registration is not
+* unnecessarily executed.
+*/
+
+add_action( 'init', 'custom_post_type', 0 );
+
+function sm_custom_meta() {
+    add_meta_box( 'sm_meta', __( 'Featured Posts', 'sm-textdomain' ), 'sm_meta_callback', 'post' );
+}
+
+function sm_meta_callback( $post ) {
+    $featured = get_post_meta( $post->ID );
+    ?>
+
+    <p>
+    <div class="sm-row-content">
+        <label for="meta-checkbox">
+            <input type="checkbox" name="meta-checkbox" id="meta-checkbox" value="yes" <?php if ( isset ( $featured['meta-checkbox'] ) ) checked( $featured['meta-checkbox'][0], 'yes' ); ?> />
+            <?php _e( 'Featured this post', 'sm-textdomain' )?>
+        </label>
+
+    </div>
+    </p>
+
+<?php
+}
+add_action( 'add_meta_boxes', 'sm_custom_meta' );
+
+/**
+ * Saves the custom meta input
+ */
+function sm_meta_save( $post_id ) {
+
+    // Checks save status
+    $is_autosave = wp_is_post_autosave( $post_id );
+    $is_revision = wp_is_post_revision( $post_id );
+    $is_valid_nonce = ( isset( $_POST[ 'sm_nonce' ] ) && wp_verify_nonce( $_POST[ 'sm_nonce' ], basename( __FILE__ ) ) ) ? 'true' : 'false';
+
+    // Exits script depending on save status
+    if ( $is_autosave || $is_revision || !$is_valid_nonce ) {
+        return;
+    }
+
+    // Checks for input and saves
+    if( isset( $_POST[ 'meta-checkbox' ] ) ) {
+        update_post_meta( $post_id, 'meta-checkbox', 'yes' );
+    } else {
+        update_post_meta( $post_id, 'meta-checkbox', '' );
+    }
+
+}
+add_action( 'save_post', 'sm_meta_save' );
+
 function vcomment_list_func( $atts ) {
     $a = shortcode_atts( array(
         'id' => [8,9],
@@ -148,7 +294,7 @@ function vcomment_list_func( $atts ) {
     $args = array(
         'posts_per_page'   => 5,
         'offset'           => 0,
-        'category'         => $a['id'],
+        'category__in'      => $a['id'],
         'category_name'    => '',
         'orderby'          => 'date',
         'order'            => 'DESC',
@@ -187,6 +333,82 @@ function vcomment_list_func( $atts ) {
     return $html;
 }
 add_shortcode( 'v_lists', 'vcomment_list_func' );
+
+
+function feature_list_func (){
+    $args = array(
+        'posts_per_page' => 7,
+        'meta_key' => 'meta-checkbox',
+        'meta_value' => 'yes'
+    );
+    $featured = new WP_Query($args);
+    $i = 0;
+    $total = count($featured->posts);
+    ob_start();
+    foreach($featured->posts as $post){
+        if($i < 3) {
+    ?>
+        <div class="flex_column av_one_fourth   <?php if($i == 0) { ?>el_before_av_one_fourth el_after_av_hr first<?php } ?> ">
+            <div style="padding-bottom:10px;" class="av-special-heading av-special-heading-h6">
+                <h6 class="av-special-heading-tag" itemprop="headline"> <?php echo $post->post_title ?></h6>
+                <div class="special-heading-border">
+                    <div class="special-heading-inner-border"></div>
+                </div>
+            </div>
+            <div style="height:40px" class="hr hr-invisible el_after_av_heading  el_before_av_textblock  ">
+                <span class="hr-inner "><span class="hr-inner-style"></span></span>
+            </div>
+            <section class="av_textblock_section" itemscope="itemscope" itemtype="https://schema.org/CreativeWork">
+                <div class="avia_textblock " itemprop="text">
+                    <p><?php echo apply_filters('the_excerpt', $post->post_excerpt) ?></p>
+                    <p style="text-align: right;"><a class="yellow read-more" href="<?php echo get_permalink($post->ID); ?>">View more -&gt;</a></p>
+                </div>
+            </section>
+        </div>
+    <?php
+    }else{
+            if($i == 3){
+    ?>
+                <div class="flex_column av_one_fourth   avia-builder-el-91  el_after_av_one_fourth  avia-builder-el-last  ">
+                    <section class="av_textblock_section" itemscope="itemscope" itemtype="https://schema.org/CreativeWork">
+                        <div class="avia_textblock " itemprop="text">
+                            <ul style="margin-top:45px;">
+                <?php   } ?>
+                                <li><a href="<?php echo get_permalink($post->ID); ?>"><?php echo $post->post_title ?></a></li>
+           <?php if(($i < 5 && $i == $total - 1) || $i == 5 ) { ?>
+                            </ul>
+                        </div>
+                    </section>
+                    <?php }
+
+            if ($i == 6){?>
+                    <div class="avia-button-wrap avia-button-right  avia-builder-el-93  el_after_av_textblock  avia-builder-el-last  ">
+                        <a href="#" class="avia-button  avia-icon_select-no avia-color-theme-color avia-size-small avia-position-right ">
+                            <span class="avia_iconbox_title">More News</span>
+                        </a>
+                    </div>
+                    <?php } if($i == $total - 1){ ?>
+                </div>
+            <?php
+                }
+            }
+        $i++;
+    }
+    return ob_get_clean();
+}
+
+add_shortcode( 'feature_list', 'feature_list_func' );
+
+//add_filter('wp_trim_excerpt', function($text){
+//    $max_length = 140;
+//
+//    if(mb_strlen($text, 'UTF-8') > $max_length){
+//        $split_pos = mb_strpos(wordwrap($text, $max_length), "\n", 0, 'UTF-8');
+//        $text = mb_substr($text, 0, $split_pos, 'UTF-8')."[...]";
+//    }
+//
+//    return $text;
+//});
 
 add_filter( 'dynamic_sidebar_params', 'b3m_wrap_widget_titles', 20 );
 function b3m_wrap_widget_titles( array $params ) {
@@ -259,5 +481,7 @@ function get_zone_info($zone_name,$weight,$type){
     }
     return $results;
 }
+
+
 
 ?>

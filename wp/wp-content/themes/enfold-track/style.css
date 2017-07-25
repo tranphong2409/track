@@ -24,9 +24,7 @@
 #header_main,#header_meta, #header_main_alternate, .avia-section{border: 0 none;}
 #main-menu .avia-bullet, #main-menu .avia-menu-fx{display: none;}
 #header #main-menu .mm-container{width:100%;}
-#header .top-menu .menu-link li:last-child a::after{
-    content:"";
-}
+#header .top-menu .menu-link li:last-child a::after{ content:""; }
 #header #main-menu .mm-container .search-form{position: relative;top:5px;width: 266px;padding-left: 75px;}
 #header #main-menu .mm-container .search-form #s{background: none; border: 0 none;color:#fff;font-size:14px; line-height: 22px; }
 #header #main-menu .mm-container .search-form .button{background: transparent; }
@@ -35,6 +33,8 @@
 #slideshow.front .track-box .track, #slideshow.front .track-box .quote{width: 383px;}
 #slideshow.front .track-box .track button{text-indent: -4.5px;}
 #slideshow.front .track-box .quote button{text-indent: 4.5px;}
+#slideshow.front{background-attachment: fixed; background-size: cover;}
+h2.av-special-heading-tag{font-weight: bold !important;}
 .u-border .special-heading-border{display: block !important;}
 .u-border .special-heading-border .special-heading-inner-border{border-width:2px;margin: 0; opacity: 1; }
 #services-box {background: #fab804;}
@@ -150,7 +150,7 @@
     -moz-text-align-last: center; text-align-last: center;
 }
 .track-box  button#bt_get_quote {
-    height: 75px !important;
+    height: 77px !important;
 }
 
 .quote-popup{max-width: 650px;margin: 0 auto; background: #fff; padding: 20px;position: relative;}
@@ -159,6 +159,8 @@
 }
 .quote-popup .modal-title{padding-bottom: 10px; border-bottom: 1px solid #fab804;}
 body{font-family: "utm_avoregular", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif !important;}
+
+
 	/* large screens with 1140px with */
 	@media only screen and (min-width: 1140px)  {
 
