@@ -17,7 +17,8 @@ html {
 
 @font-face {
   font-family: 'utm_avoregular';
-  src: url("../fonts/utm_avo-webfont.woff2") format("woff2"), url("../fonts/utm_avo-webfont.woff") format("woff"), url("../fonts/utm_avo-webfont.ttf") format("truetype"), url("../fonts/utm_avo-webfont.svg#utm_avoregular") format("svg");
+    src: url('../fonts/utmavo.eot');
+    src: local('utmavo'), url('../fonts/utmavo.woff') format('woff'), url('../fonts/utmavo.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }

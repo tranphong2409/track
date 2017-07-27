@@ -7,6 +7,8 @@
  */
 
 jQuery(document).ready(function($) {
+    var breadcrumb = jQuery('.breadcrumb').html();
+    jQuery("#breadcrumb").find(".container").html(breadcrumb);
     jQuery('#quote-form').on('click', '#bt_get_quote', function(e) {
         e.preventDefault();
         var args = $('#quote-form').serializeArray().reduce(function(obj, item) {
@@ -50,4 +52,5 @@ jQuery(document).ready(function($) {
             }
         });
     });
+
 });

@@ -131,7 +131,7 @@ if($headerS['header_topbar'] == true)
 						    echo $extraClose;
 
 
-						    echo "<nav class=' ' id='main-menu' data-selectname='".__('Select a page','avia_framework')."' ".avia_markup_helper(array('context' => 'nav', 'echo' => false)).">";
+						    echo "<nav class='main_menu' id='main-menu' data-selectname='".__('Select a page','avia_framework')."' ".avia_markup_helper(array('context' => 'nav', 'echo' => false)).">";
 						        $avia_theme_location = 'avia';
 						        $avia_menu_class = $avia_theme_location . '-menu_ mm-container';
 						        $args = array(

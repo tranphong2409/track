@@ -410,6 +410,21 @@ add_shortcode( 'feature_list', 'feature_list_func' );
 //    return $text;
 //});
 
+/*
+ * Menu shortcode
+ *
+ *
+ * */
+
+function print_menu_shortcode($atts) {
+    $a = shortcode_atts( array(
+        'name' => 'main-menu',
+    ), $atts );
+    return wp_nav_menu( array( 'menu' => $a['name'], 'echo' => false ) );
+}
+add_shortcode('menu', 'print_menu_shortcode');
+
+
 add_filter( 'dynamic_sidebar_params', 'b3m_wrap_widget_titles', 20 );
 function b3m_wrap_widget_titles( array $params ) {
 
