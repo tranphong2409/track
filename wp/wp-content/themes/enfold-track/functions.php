@@ -5,7 +5,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
- 
+
+add_filter( 'auto_update_plugin', '__return_false' );
+add_filter( 'auto_update_theme', '__return_false' );
+
 // Add "custom CSS" field for Enfold builder elements
 add_theme_support('avia_template_builder_custom_css');
 
@@ -42,33 +45,6 @@ function avia_append_search_nav ( $items, $args )
  * CUSTOM GLOBAL VARIABLES
  */
 
-
-function add_global_custom_options()
-{
-    add_options_page('Custom Options', 'Custom Options', 'manage_options', 'functions','global_custom_options');
-}
-add_action('admin_menu', 'add_global_custom_options');
-
-function global_custom_options()
-{
-    ?>
-    <div class="wrap">
-        <h2>Global Custom Options</h2>
-        <form method="post" action="options.php">
-            <?php wp_nonce_field('update-options') ?>
-            <p><strong>Mã danh mục tiếng anh:</strong><br />
-                <input type="text" name="en_categories" size="45" value="<?php echo get_option('en_categories'); ?>" />
-            </p>
-            <p><strong>Mã danh mục tiếng việt:</strong><br />
-                <input type="text" name="vn_categories" size="45" value="<?php echo get_option('vn_categories'); ?>" />
-            </p>
-            <p><input type="submit" name="Submit" value="Lưu" /></p>
-            <input type="hidden" name="action" value="update" />
-            <input type="hidden" name="page_options" value="en_categories,vn_categories" />
-        </form>
-    </div>
-<?php
-}
 
 
 function get_zone(){
@@ -130,7 +106,7 @@ function quote_shortcode(){
                         <option value="2">'.__("Parcel").'</option>
                     </select>
             </div>
-            <button id="bt_get_quote">'.__("Get a Quote").'</button> <span style="padding-left:20px"> <i class="yellow"> * </i> '.__("Your detail will be maintained confidentially").'</span>
+            <button id="bt_get_quote">'.__("Get a Quote").'</button> <span class="quote-note"> <i class="yellow"> * </i> '.__("Your detail will be maintained confidentially").'</span>
             </form>
         </div>
     ';
@@ -497,6 +473,34 @@ function get_zone_info($zone_name,$weight,$type){
     return $results;
 }
 
+function remove_menus(){
 
+    remove_menu_page( 'index.php' );                  //Dashboard
+    remove_menu_page( 'edit-comments.php' );          //Comments
+    remove_menu_page( 'plugins.php' );                //Plugins
+    remove_menu_page( 'users.php' );                  //Users
+    remove_menu_page( 'tools.php' );                  //Tools
+    remove_menu_page( 'options-general.php' );        //Settings
+    remove_menu_page( 'admin.php?page=avia' );        //slider
+    remove_menu_page( 'admin.php?page=mlang' );        //lang
+    remove_menu_page( 'admin.php?page=layerslider' );        //layerslider
+    remove_menu_page( 'edit.php?post_type=portfolio' );        //portfolio
+
+}
+add_action( 'admin_menu', 'remove_menus' );
+
+function my_login_logo() { ?>
+    <style type="text/css">
+        #login h1 a, .login h1 a {
+            background-image: url(<?php echo get_stylesheet_directory_uri(); ?>/images/logo.gif);
+            height: 87px;
+            width: 150px;
+            background-size: 100%;
+            background-repeat: no-repeat;
+            padding-bottom: 30px;
+        }
+    </style>
+<?php }
+add_action( 'login_enqueue_scripts', 'my_login_logo' );
 
 ?>

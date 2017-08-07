@@ -26,13 +26,13 @@ jQuery(document).ready(function($) {
             success : function( response ) {
                 var table = '';
                 if(!response.error){
-                    table = '<table class="table table-striped" id="tblGrid"> <thead id="tblHead"> <tr> <th>Services</th> <th>Transportation time</th> <th class="text-right">Transportation Fee</th> </tr></thead> <tbody> ' ;
+                    table = '<table class="table table-striped" id="tblGrid"> <thead id="tblHead"> <tr> <th>Services</th> <th>Time</th> <th class="text-right">Fee</th> </tr></thead> <tbody> ' ;
                     var res_val = response.val;
 
                     for(var i = 0; i < res_val.length; i++){
-                        table +='<tr><td>'+ res_val[i].name+'</td><td>'+ res_val[i].day_time+'</td><td class="text-right">'+ res_val[i].price + ' $</td></tr>';
+                        table +='<tr><td>'+ res_val[i].name+'</td><td>'+ res_val[i].day_time+'</td><td class="text-right">'+ res_val[i].price + ((parseInt(response.weight) >= 21)?' $/kg':' $') + ' </td></tr>';
                     }
-                    table += '</tbody> </table> ';
+                    table += '</tbody> </table> <p>Báo giá trên là giá tạm tính (tùy thuộc vào chi tiết hàng cụ thể, địa chỉ người nhận...sẽ có giá khác nhau). Vui lòng liên hệ với chúng tôi để nhận được báo giá tốt nhất.</p>';
                 }else{
                     table= response.txt;
                 }
@@ -53,4 +53,16 @@ jQuery(document).ready(function($) {
         });
     });
 
+    var wWidth = window.innerWidth;
+    if(wWidth < 767){
+        var headerInformation = jQuery('.header-information');
+        var topMenu = jQuery('#avia2-menu');
+        setTimeout(function(){
+            jQuery('#mobile-advanced').append(topMenu.html()+'<li class="mobile-information">'+headerInformation.html()+'</li>');
+            headerInformation.remove();
+            topMenu.remove();
+        },1000);
+
+
+    }
 });

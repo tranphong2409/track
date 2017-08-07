@@ -112,9 +112,9 @@ if($headerS['header_topbar'] == true)
                         ?>
                         <div class="header-information">
                             <ul>
-                                <li><div class="icon"><img src="/images/icon/ico_phone.gif" alt="Call us"></div><div><p><?php printf(__('Call us on')); ?></p><p class="main-info">+84 944 484 584</p></div></li>
-                                <li><div class="icon"><img src="/images/icon/ico_mail.gif" alt="Mail us"></div><div><p><?php printf(__("Mail us")) ?></p><p class="main-info"><a href="mailto:info@foco.com.vn">info@foco.com.vn</a></p></div></li>
-                                <li><div class="icon"><img src="/images/icon/ico_clock.gif" alt="Working Hours"></div><div><p><?php printf(__("Working Hours")) ?></p><p class="main-info"><?php printf(__("Mon - Sat: 8:00 - 18:00")) ?></p></div></li>
+                                <li><div class="icon"><img src="/images/icon/ico_phone.gif" alt="Call us"></div><div><div class="hd-title"><?php printf(__('Call us on')); ?></div><div class="main-info">+84 944 484 584</div></div></li>
+                                <li><div class="icon"><img src="/images/icon/ico_mail.gif" alt="Mail us"></div><div><div class="hd-title"><?php printf(__("Mail us")) ?></div><div class="main-info"><a href="mailto:info@foco.com.vn">info@foco.com.vn</a></div></div></li>
+                                <li><div class="icon"><img src="/images/icon/ico_clock.gif" alt="Working Hours"></div><div><div class="hd-title"><?php printf(__("Working Hours")) ?></div><div class="main-info"><?php printf(__("Mon - Sat: 8:00 - 18:00")) ?></div></div></li>
                             </ul>
                         </div>
                         <?php

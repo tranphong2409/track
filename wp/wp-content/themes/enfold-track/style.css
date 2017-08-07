@@ -164,6 +164,17 @@ h2.av-special-heading-tag{font-weight: bold !important; }
 }
 .quote-popup .modal-title{padding-bottom: 10px; border-bottom: 1px solid #fab804;}
 .title_container.stretch_full {display:none;}
+.partner-box{background-color: #eee;}
+#feature h2{font-size: 40px;}
+#wrap_all{position:relative;}
+.hd-title {
+    float: left;
+    line-height: 18px;
+    width: 80%;
+}
+#header .header-information li .main-info{line-height: 20px;}
+#quote-form .quote-note{padding-left:20px;}
+.track-searchbox .track .input-field input{width: 100% !important;}
 /*.html_header_top.html_header_sticky #header{background:#fff;}*/
 /*.html_header_top.html_header_sticky #header #header_meta{display:none;}*/
 body{font-family: "utm_avoregular", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif !important;}
@@ -171,12 +182,12 @@ body{font-family: "utm_avoregular", "Helvetica Neue", "Helvetica", "Roboto", "Ar
 
 	/* large screens with 1140px with */
 	@media only screen and (min-width: 1200px)  {
-	}
+    }
 
     @media only screen and (min-width: 990px) and (max-width: 1199px) {
         #header #main-menu .mm-container li a{font-size:13px;}
         #header #main-menu .mm-container .search-form {
-            width: 190px;
+            width: 173px;
             padding-left: 35px;
         }
         #header #main-menu {
@@ -185,6 +196,8 @@ body{font-family: "utm_avoregular", "Helvetica Neue", "Helvetica", "Roboto", "Ar
         #slideshow.front .track-box .track, #slideshow.front .track-box .quote {
             width: 345px;
         }
+        .sp-title{font-size: 20px;}
+        .grid-cells{width:100%;}
     }
 
 	/* Smaller than standard 960 (devices and browsers) */
@@ -197,7 +210,14 @@ body{font-family: "utm_avoregular", "Helvetica Neue", "Helvetica", "Roboto", "Ar
         }
         #header .top-menu{width: 670px;}
         #header .top-menu .menu-link a{padding:5px;}
-        .header-information{display: none;}
+        #header .header-information{
+            width: 635px;
+            padding-left: 90px;
+        }
+        #header .header-information li .icon{
+            width: 25px;
+            height: 30px;
+        }
         .counter-number.av-border-cells .flex_cell{border:0 none;}
         #header {
             height: 140px;
@@ -214,6 +234,17 @@ body{font-family: "utm_avoregular", "Helvetica Neue", "Helvetica", "Roboto", "Ar
         #mobile-advanced li > a:before, .html_header_mobile_behavior #mobile-advanced span > a:before, #mobile-advanced .mega_menu_title:before{
             top:20px;
         }
+        .sp-title{font-size: 20px;}
+        #top .no_margin.av_one_fourth{clear:none;}
+        .grid-cells{width:100%;}
+        .hd-title {
+            line-height: 25px;
+            font-size: 12px;
+            padding-top: 5px;
+        }
+        #header .header-information li .main-info{clear: left;font-size: 14px;}
+        #quote-form .quote-note{display: block;padding: 0;}
+        #quotes .container{padding:10px !important;}
 	}
 
 
@@ -221,6 +252,9 @@ body{font-family: "utm_avoregular", "Helvetica Neue", "Helvetica", "Roboto", "Ar
 	@media only screen and (min-width: 768px) and (max-width: 989px) {
 
         .counter-number.av-border-cells .flex_cell{border:0 none;}
+        .grid-cells{width:100%;}
+        .quote-popup{max-width: 100%;padding:2px;}
+        #quotes .container{width: 100%;}
 	}
 
 	/* All Mobile Sizes (devices and browser) */
@@ -229,8 +263,51 @@ body{font-family: "utm_avoregular", "Helvetica Neue", "Helvetica", "Roboto", "Ar
         .responsive #top #header_meta .social_bookmarks li:last-child{border: 0 none;}
         #header .top-menu{width: 655px;}
         #header .top-menu .menu-link a{padding:5px;}
-        .header-information{display: none;}
         .counter-number.av-border-cells .flex_cell{border:0 none;}
+        .sp-title{font-size: 20px;}
+        .grid-cells{width:100%;}
+        .quote-popup{max-width: 650px;padding: 2px;}
+        .header-information,#avia2-menu{display: none;}
+        #slideshow.front{padding-top:100px;height: 430px;}
+        #slideshow.front .track-box .track, #slideshow.front .track-box .quote{width: 260px;}
+        #mobile-advanced .mobile-information li{
+            padding: 15px;
+            border-bottom: 1px solid #ccc;
+        }
+        #mobile-advanced .mobile-information li .icon{
+            float: left;
+            width: 30px;
+            height: 40px;}
+        #mobile-advanced .mobile-information li .hd-title{
+            line-height: 18px;
+            font-size: 15px;
+            padding-left: 5px;
+            padding-top:0;
+            float: none;
+        }
+        #mobile-advanced .mobile-information li a{
+            padding: 0;
+            border: 0 none;
+        }
+        .tracking-info .timer.iconlist_title{float:left;width:80px;text-align: right; padding-right:10px;}
+        .tracking-info .iconlist_title{padding-bottom: 5px;
+            font-size: 13px;}
+        .tracking-info .avia-icon-list .iconlist_icon {
+            height: 50px;
+            width: 50px;
+            line-height: 50px;
+            font-size: 30px;
+            text-align: center;
+            border-radius: 500px;
+            position: relative;
+            float: left;
+            margin-right: 15px;
+            margin-left: 2px;
+            z-index: 5;
+            color: #fff;
+        }
+        .tracking-info .iconlist_content {font-size:12px;}
+        .tracking-info .avia-icon-list .iconlist-timeline{left: 105px;}
  	}
 
 	/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
