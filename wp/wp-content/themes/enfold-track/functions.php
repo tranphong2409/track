@@ -133,6 +133,124 @@ function slideshow2_shortcode() {
 }
 add_shortcode('_slideshow', 'slideshow2_shortcode');
 
+
+function track_shortcode() {
+    $code = '<div class="flex_column av_one_third first  avia-builder-el-6  el_after_av_hr  el_before_av_two_third  "><section class="avia_codeblock_section avia_code_block_1"  itemscope="itemscope" itemtype="https://schema.org/CreativeWork" ><div class=\'avia_codeblock track-searchbox\'  itemprop="text" > <div class="track">
+            <button>'.__("Track & Trace").'</button>
+            <div class="input-field">
+                <input class="text-box" type="text" placeholder="84122214" >
+            </div>
+        </div> </div></section>
+<div class=\'av-catalogue-container  avia-builder-el-8  el_after_av_codeblock  avia-builder-el-last  \'><ul class=\'av-catalogue-list\'>
+<li><div class=\'av-catalogue-item\'><div class=\'av-catalogue-item-inner\'><div class=\'av-catalogue-title-container\'><div class=\'av-catalogue-title\'>Awb.No</div><div class=\'av-catalogue-price\'></div></div><div class=\'av-catalogue-content\'>
+<em><strong>84122214</strong></em><br />
+</div></div></div></li>
+<li><div class=\'av-catalogue-item\'><div class=\'av-catalogue-item-inner\'><div class=\'av-catalogue-title-container\'><div class=\'av-catalogue-title\'>'.__("Destination").'</div><div class=\'av-catalogue-price\'></div></div><div class=\'av-catalogue-content\'>
+<em><strong>AUSTRALIA</strong></em><br />
+</div></div></div></li>
+<li><div class=\'av-catalogue-item\'><div class=\'av-catalogue-item-inner\'><div class=\'av-catalogue-title-container\'><div class=\'av-catalogue-title\'>'.__("Origin").'</div><div class=\'av-catalogue-price\'></div></div><div class=\'av-catalogue-content\'>
+<em><strong>HOCHIMINH &#8211; VIET NAM</strong></em><br />
+</div></div></div></li>
+<li><div class=\'av-catalogue-item\'><div class=\'av-catalogue-item-inner\'><div class=\'av-catalogue-title-container\'><div class=\'av-catalogue-title\'>'.__("Status").'</div><div class=\'av-catalogue-price\'></div></div><div class=\'av-catalogue-content\'>
+<em><strong>SHIPMENT DELIVERED, SIGNED FOR BY: DEVESH</strong></em><br />
+</div></div></div></li>
+</ul></div></div><div class="flex_column av_two_third   avia-builder-el-9  el_after_av_one_third  avia-builder-el-last  "><section class="avia_codeblock_section avia_code_block_2"  itemscope="itemscope" itemtype="https://schema.org/CreativeWork" ><div class=\'avia_codeblock \'  itemprop="text" > <div class="tracking-info">
+<ul class="avia-icon-list avia-icon-list-left avia_animate_when_almost_visible avia_start_animation">
+	<li class="avia_start_animation">
+		<div class="timer iconlist_title">
+			<h4 class="iconlist_title">
+2016-02-01</h4>
+			<div class="hightlight" hightlight="">	14:30</div>
+		</div>
+		<div style="" class="iconlist_icon avia-font-entypo-fontello"><span class="iconlist-char" aria-hidden="true" data-av_icon="" data-av_iconfont="entypo-fontello"></span></div>
+		<article class="article-icon-entry " itemscope="itemscope" itemtype="https://schema.org/CreativeWork">
+			<div class="iconlist_content_wrap">
+				<header class="entry-content-header"><h4 class="iconlist_title" itemprop="headline">	HOCHIMINH - VIETNAM</h4></header>
+				<div class="iconlist_content " itemprop="text">
+					<p>
+SHIPMENT PICKED UP</p>
+				</div>
+			</div>
+			<footer class="entry-footer"></footer>
+		</article>
+	<div class="iconlist-timeline"></div>
+	</li>
+
+	<li class="avia_start_animation">
+		<div class="timer iconlist_title">
+			<h4 class="iconlist_title">2016-02-01</h4>
+			<div class="hightlight" hightlight="">16:55</div>
+		</div>
+		<div style="" class="iconlist_icon avia-font-entypo-fontello"><span class="iconlist-char" aria-hidden="true" data-av_icon="" data-av_iconfont="entypo-fontello"></span></div>
+		<article class="article-icon-entry " itemscope="itemscope" itemtype="https://schema.org/CreativeWork">
+			<div class="iconlist_content_wrap">
+				<header class="entry-content-header"><h4 class="iconlist_title" itemprop="headline">HOCHIMINH - VIETNAM	</h4></header>
+				<div class="iconlist_content " itemprop="text">
+					<p>CLEARANCE PROCESSING</p>
+				</div>
+			</div>
+			<footer class="entry-footer"></footer>
+		</article>
+	<div class="iconlist-timeline"></div>
+	</li>
+	<li class="avia_start_animation">
+		<div class="timer iconlist_title">
+			<h4 class="iconlist_title">2016-02-01</h4>
+			<div class="hightlight" hightlight="">17:00</div>
+		</div>
+		<div  style="background-color:#d54e21; " class="iconlist_icon avia-font-entypo-fontello"><span class="iconlist-char" aria-hidden="true" data-av_icon="" data-av_iconfont="entypo-fontello"></span></div>
+		<article class="article-icon-entry " itemscope="itemscope" itemtype="https://schema.org/CreativeWork">
+			<div class="iconlist_content_wrap">
+				<header class="entry-content-header"><h4 class="iconlist_title" itemprop="headline">HOCHIMINH - VIETNAM	</h4></header>
+				<div class="iconlist_content " itemprop="text">
+					<p>INVALID</p>
+				</div>
+			</div>
+			<footer class="entry-footer"></footer>
+		</article>
+	<div class="iconlist-timeline"></div>
+	</li>
+	<li class="avia_start_animation">
+		<div class="timer iconlist_title">
+			<h4 class="iconlist_title">2016-02-01</h4>
+			<div class="hightlight" hightlight="">22:30</div>
+		</div>
+		<div style="" class="iconlist_icon avia-font-entypo-fontello"><span class="iconlist-char" aria-hidden="true" data-av_icon="" data-av_iconfont="entypo-fontello"></span></div>
+		<article class="article-icon-entry " itemscope="itemscope" itemtype="https://schema.org/CreativeWork">
+			<div class="iconlist_content_wrap">
+				<header class="entry-content-header"><h4 class="iconlist_title" itemprop="headline">SINGAPORE - SINGAPORE	</h4></header>
+				<div class="iconlist_content " itemprop="text">
+					<p>ARRIVED AT SORT FACILITY SINGAPORE - SINGAPORE</p>
+				</div>
+			</div>
+			<footer class="entry-footer"></footer>
+		</article>
+	<div class="iconlist-timeline"></div>
+	</li>
+
+
+	<li class="avia_start_animation">
+		<div class="timer iconlist_title">
+			<h4 class="iconlist_title">2016-02-05</h4>
+			<div class="hightlight" hightlight="">11:00</div>
+		</div>
+		<div style="background-color:#fab704; " class="iconlist_icon avia-font-entypo-fontello"><span class="iconlist-char" aria-hidden="true" data-av_icon="" data-av_iconfont="entypo-fontello"></span></div>
+		<article class="article-icon-entry " itemscope="itemscope" itemtype="https://schema.org/CreativeWork">
+			<div class="iconlist_content_wrap">
+				<header class="entry-content-header"><h4 class="iconlist_title" itemprop="headline">NSW – AUSTRALIA</h4></header>
+				<div class="iconlist_content " itemprop="text">
+					<p>SHIPMENT DELIVERED, SIGNED FOR BY: DEVESH</p>
+				</div>
+			</div>
+			<footer class="entry-footer"></footer>
+		</article>
+	<div class="iconlist-timeline"></div>
+	</li>
+</ul></div> </div></section></div>';
+    return $code;
+}
+add_shortcode('track', 'track_shortcode');
+
 add_shortcode( 'bread_crumb', 'avia_title' );
 
 // remove title
@@ -214,7 +332,7 @@ function custom_post_type() {
 * unnecessarily executed.
 */
 
-add_action( 'init', 'custom_post_type', 0 );
+//add_action( 'init', 'custom_post_type', 0 );
 
 function sm_custom_meta() {
     add_meta_box( 'sm_meta', __( 'Featured Posts', 'sm-textdomain' ), 'sm_meta_callback', 'post' );
@@ -401,6 +519,7 @@ function print_menu_shortcode($atts) {
 add_shortcode('menu', 'print_menu_shortcode');
 
 
+
 add_filter( 'dynamic_sidebar_params', 'b3m_wrap_widget_titles', 20 );
 function b3m_wrap_widget_titles( array $params ) {
 
@@ -478,7 +597,7 @@ function remove_menus(){
     remove_menu_page( 'index.php' );                  //Dashboard
     remove_menu_page( 'edit-comments.php' );          //Comments
     remove_menu_page( 'plugins.php' );                //Plugins
-    remove_menu_page( 'users.php' );                  //Users
+//    remove_menu_page( 'users.php' );                  //Users
     remove_menu_page( 'tools.php' );                  //Tools
     remove_menu_page( 'options-general.php' );        //Settings
     remove_menu_page( 'admin.php?page=avia' );        //slider
