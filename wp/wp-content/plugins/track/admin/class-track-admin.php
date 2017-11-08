@@ -349,6 +349,14 @@ class Track_Admin
         return $results;
     }
 
+    private function getUserList()
+    {
+        global $wpdb;
+        $sql = 'SELECT u.user_login FROM wp_users as u ';
+        $results = $wpdb->get_results($sql);
+        return $results;
+    }
+
     private function getTrackingListItem($code){
         global $wpdb;
         $sql = 'SELECT * FROM wp_tracking_item WHERE code like "' . trim($code) . '"';
@@ -376,6 +384,7 @@ class Track_Admin
                 include_once('partials/track-admin-edit-display.php');
                 break;
             case "add":
+                $userlist = json_encode($this->getUserList());
                 include_once('partials/track-admin-add-display.php');
                 break;
             default:

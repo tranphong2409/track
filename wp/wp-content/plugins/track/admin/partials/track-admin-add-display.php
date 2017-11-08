@@ -34,7 +34,7 @@
 
         <div class="input-group username-box">
             <span class="input-group-addon">username: </span>
-            <input type="text" class="form-control new-tracking-username" value=""/>
+            <input type="text" class="form-control new-tracking-username typeahead" value=""/>
         </div>
         <br>
 
@@ -61,6 +61,7 @@
             <button class="btn btn-danger nav-back">Hủy</button>
         </div>
     </div>
+    <input type="hidden" value="<?php echo $userlist; ?>" id="userlist" />
     <div id='alert' role="alert">
 
     </div>

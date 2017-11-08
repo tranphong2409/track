@@ -271,8 +271,8 @@
         });
 
         jQuery(".clickable td").click(function () {
-            var link = jQuery(this).parents('tr').attr("data-link");
-            window.location.href = link;
+            var sLink = jQuery(this).parents('tr').attr("data-link");
+            window.location.href = sLink;
         });
         jQuery("#search-tracking").click(function () {
             var code = jQuery("#track-id").val();
@@ -434,7 +434,7 @@
                             location: trItem.find(".location").html(),
                             note: trItem.find(".note").html(),
                             status: status
-                        }
+                        };
                         popup.find('.timereadonly').val(dataItem.time);
                         popup.find('.location').val(dataItem.location);
                         popup.find('.note').val(dataItem.note);
