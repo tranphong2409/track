@@ -163,6 +163,7 @@ class Track {
         $this->loader->add_action( 'wp_ajax_create_tracking_item', $plugin_admin,'create_tracking_item' );
         $this->loader->add_action( 'wp_ajax_update_tracking_item', $plugin_admin,'update_tracking_item' );
         $this->loader->add_action( 'wp_ajax_delete_tracking_item', $plugin_admin,'delete_tracking_item' );
+        $this->loader->add_action( 'wp_ajax_resolve_tracking_item', $plugin_admin,'resolve_tracking_item' );
 
 
 // Add Settings link to the plugin

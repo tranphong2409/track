@@ -62,7 +62,7 @@
             <button class="btn btn-danger nav-back">Hủy</button>
             </div>
             <div class="pull-right">
-                <button class="btn btn-primary" id="new-tracking-add">Hoàn Thành</button>
+                <button class="btn btn-primary" id="new-tracking-resolve">Hoàn Thành</button>
             </div>
             
         </div>

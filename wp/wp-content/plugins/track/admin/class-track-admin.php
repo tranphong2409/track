@@ -317,6 +317,19 @@ class Track_Admin
         wp_send_json($return);
     }
 
+    public function resolve_tracking_item()
+    {
+
+        print_r('324 class track admin');exit;
+
+//        $return = array("msg" => "Vui lòng nhập đầy đủ thông tin", "is_error" => true);
+//        $item = $_POST['Item'];
+//        if (isset($item) && !empty($item)) {
+//            print_r('324 class track admin');exit;
+//        }
+//        wp_send_json($return);
+    }
+
     /**
      * Add settings action link to the plugins page.
      *
@@ -386,6 +399,12 @@ class Track_Admin
             case "add":
                 $userlist = json_encode($this->getUserList());
                 include_once('partials/track-admin-add-display.php');
+                break;
+            case "resolve":
+                print_r($_POST);exit;
+                $userlist = json_encode($this->getUserList());
+                print_r($userlist);
+                exit;
                 break;
             default:
                 include_once('partials/track-admin-display.php');
