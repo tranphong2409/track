@@ -320,8 +320,18 @@ class Track_Admin
     public function resolve_tracking_item()
     {
 
-        print_r('324 class track admin');exit;
+        $configmail = new stdClass();
+        $configmail->GUSER = "info@webandlife.net";
+        $configmail->SMTPHOST = "smtp.zoho.com";
+        $configmail->GPWD = "123456789aA!";
+        $configmail->SMTPSERCURITY = "tls";
 
+        $body = "test by Phuc Nguyen";
+        $return = $this->smtpmailer("nguyenvanphuc0626@gmail.com", $configmail->GUSER, "FOCO TRACKING", "Tracking is resolved", $body, '', $configmail);
+        echo '<pre>';
+        print_r($return);
+        echo '</pre>';
+        exit;
 //        $return = array("msg" => "Vui lòng nhập đầy đủ thông tin", "is_error" => true);
 //        $item = $_POST['Item'];
 //        if (isset($item) && !empty($item)) {
@@ -411,5 +421,46 @@ class Track_Admin
         }
 
     }
+    
+    public function smtpmailer($to, $from, $from_name, $subject, $body,$attachment='',$configmail)
+        {
+            require_once('../wp-includes/PHPMailer/class.phpmailer.php');
+            require_once('../wp-includes/PHPMailer/class.pop3.php');
+            $mail = new PHPMailer;
+            $mail->CharSet="utf-8";					// bật chức năng SMTP
+            $mail->SMTPDebug = 0;  					// kiểm tra lỗi : 1 là  hiển thị lỗi và thông báo cho ta biết, 2 = chỉ thông báo lỗi
+            $mail->SMTPAuth = true;  				// bật chức năng đăng nhập vào SMTP này
+            
+            $mail->isSMTP();                                      // Set mailer to use SMTP
+            $mail->Host = $configmail->SMTPHOST;  // Specify main and backup SMTP servers
+            $mail->SMTPAuth = true;                               // Enable SMTP authentication
+            $mail->Username = $configmail->GUSER;                 // SMTP username
+            $mail->Password = $configmail->GPWD;                           // SMTP password
+            $mail->SMTPSecure = $configmail->SMTPSERCURITY; 				// sử dụng giao thức SSL vì gmail bắt buộc dùng cái này            
+            $mail->Port = 587;                                    // TCP port to connect to
+
+            $mail->From = $from;
+            $mail->FromName = $from_name;
+            $mail->addAddress($to, $from_name);     // Add a recipient
+            //$mail->addAddress('nurettin@a.com');               // Name is optional
+            //$mail->addReplyTo('satis@yandex.com.tr', 'aaa sitesii');
+            //$mail->addCC('cc@example.com');
+            //$mail->addBCC('bcc@example.com');
+
+            $mail->isHTML(true);                                  // Set email format to HTML
+
+            $mail->Subject = $subject;
+            $mail->Body    = $body;
+            $mail->AltBody = $subject;
+
+            if(!$mail->send()) {
+                return json_encode(array('error'=>false,'message'=>'Mailer Error: ' . $mail->ErrorInfo));
+            } else {
+                return json_encode(array('error'=>true,'message'=>'Mail Sent Success'));
+            }
+
+
+            
+        }
 
 }
