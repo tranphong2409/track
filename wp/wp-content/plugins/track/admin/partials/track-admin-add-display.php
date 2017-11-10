@@ -56,9 +56,15 @@
         </div>
         <br>
 
-        <div class="btn-group">
-            <button class="btn btn-primary" id="new-tracking-add">Lưu</button>
+        <div class="input-group" style="width: 100%">
+            <div class="pull-left">
+                <button class="btn btn-primary" id="new-tracking-add">Lưu</button>
             <button class="btn btn-danger nav-back">Hủy</button>
+            </div>
+            <div class="pull-right">
+                <button class="btn btn-primary" id="new-tracking-add">Hoàn Thành</button>
+            </div>
+            
         </div>
     </div>
     <input type="hidden" value="<?php echo $userlist; ?>" id="userlist" />
