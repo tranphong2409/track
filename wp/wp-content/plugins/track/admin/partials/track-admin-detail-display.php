@@ -11,6 +11,19 @@
  * @package    Track
  * @subpackage Track/admin/partials
  */
+session_start();
+$resolve_status = false;
+switch($detail[0]->status){
+    case "process":
+        $status = "Đang tiến hành";break;
+    case "error":
+        $status = "Lỗi";break;
+    case "resolve":
+        $resolve_status = true;
+        $status = "Hoàn thành";break;
+    default:
+        $status = "";
+}
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
@@ -18,16 +31,29 @@
 <div class="wrap">
     <h2><a class="btn btn-primary-outline btn-sm nav-back" href="/wp-admin/admin.php?page=track">
             <i class="glyphicon glyphicon-chevron-left"></i>
-        </a> <span> Tracking Detail</span> <a href="/wp-admin/admin.php?page=track&layout=edit&id=<?php echo $detail[0]->ID?>" class="page-title-action">Chỉnh sửa</a>
+        </a> <span> Tracking Detail</span> 
+        <?php if(!$resolve_status):?>
+        <a href="/wp-admin/admin.php?page=track&layout=edit&id=<?php echo $detail[0]->ID?>" class="page-title-action">Chỉnh sửa</a>
+        <?php endif; ?>
 
     </h2>
 
-    <div style="height:20px"></div>
+    
+    <div style="height:20px">
+       
+    </div>
     <div id='alert' role="alert">
 
     </div>
     <div id="tracking-info-header">
-
+ <?php if(!empty($_SESSION['msg-success'])):?>
+        
+        <div class="alert alert-success alert-dismissable">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <?php echo $_SESSION['msg-success']; ?>
+                                </div>
+        <?php unset($_SESSION['msg-success']);?>
+    <?php endif; ?>
     </div>
     <?php if ($id) { ?>
         <div id="tracking-information">
@@ -95,7 +121,7 @@
                                         <div class="av-catalogue-price"></div>
                                     </div>
                                     <div class="av-catalogue-content">
-                                        <em><strong><?php echo $detail[0]->status; ?></strong></em><br>
+                                        <em><strong><?php echo $status; ?></strong></em><br>
                                     </div>
                                 </div>
                             </div>
@@ -110,7 +136,7 @@
                     <th>Địa điểm</th>
                     <th>Ghi chú</th>
                     <th>Tình trạng</th>
-                    <th></th>
+                    <?php if(!$resolve_status):?><th></th><?php endif; ?>
                 </tr>
                 </thead>
                 <tbody>
@@ -128,20 +154,23 @@
                             <td><span class="note"><?php echo $e->note; ?></span></td>
                             <td><span class="status"><?php echo($e->status == 'process' ? 'Đang tiến hành' : '');
                                     echo($e->status == 'error' ? 'Lỗi' : ''); ?></span></td>
+                            <?php if(!$resolve_status):?>
                             <td>
                                 <button class="btn btn-primary btn-sm btn-update">Sửa</button>
                                 <button class="btn btn-danger btn-sm btn-delete">Xóa</button>
                             </td>
+                            <?php endif; ?>
                         </tr>
                     <?php }
                 } ?>
 
                 </tbody>
             </table>
-
+            <?php if(!$resolve_status):?>
             <button class="btn btn-primary btn-sm popup-link pull-right" id="add-tr-item">
                 <i class="glyphicon glyphicon-plus"></i> Thêm theo dõi
             </button>
+            <?php endif; ?>            
         </div>
     <?php
     } else {

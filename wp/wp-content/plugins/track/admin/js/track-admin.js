@@ -234,27 +234,18 @@
                     obj.disabled = false;
                 });
         };
-        this.resolveItem = function (data) {
+        this.resolveItem = function (ID, data, obj) {
             data.action = 'resolve_tracking_item';
-            //obj.disabled = true;
+            data.ID = ID;
+            obj.disabled = true;
             jQuery.ajax({
                 method: "POST",
                 url: ajaxurl,
                 data: data
             })
-                .done(function (msg) {
-                    console.log(11111);return false;
-//                    var className = 'alert ';
-//                    if (msg.is_error) {
-//                        className += 'alert-danger';
-//                    } else {
-//                        jQuery.magnificPopup.close();
-//                        var rowHtml = parseRow(msg.item);
-//                        jQuery('#tracking-information').find('tbody').append(rowHtml);
-//                    }
-//                    alertBox(className, msg.msg);
-//                    obj.disabled = false;
-                });
+            .done(function (msg) {
+                window.location.href = msg.link;
+            });
         };
         this.goBack = function () {
             window.history.back();
@@ -497,24 +488,14 @@
             }
         });
 
-        jQuery("#new-tracking-resolve").click(function () {
+        jQuery("#tracking-resolve").click(function () {
+            var ID = jQuery(this).attr("data-id");
+            var newTracking = jQuery('#edit-tracking');
+            var username = newTracking.find('.tracking-username').val();
+            var origin = newTracking.find('.tracking-origin').val();
+            var destination = newTracking.find('.tracking-destination').val();
+            var note = newTracking.find('.tracking-note').val() + "";
 
-            /*
-            comment test email work rui disply
-
-            var newTracking = jQuery('#new-tracking');
-            var code = newTracking.find('.new-tracking-code').val();
-            var username = newTracking.find('.new-tracking-username').val();
-            var origin = newTracking.find('.new-tracking-origin').val();
-            var destination = newTracking.find('.new-tracking-destination').val();
-            var note = newTracking.find('.new-tracking-note').val() + "";
-
-            if ($.trim(code) === "") {
-                newTracking.find(".code-box").addClass("invalid");
-                return;
-            } else {
-                newTracking.find(".code-box").removeClass("invalid");
-            }
 
             if ($.trim(username) === "") {
                 newTracking.find(".username-box").addClass("invalid");
@@ -536,29 +517,19 @@
             } else {
                 newTracking.find(".destination-box").removeClass("invalid");
             }
-
-            if (jQuery.trim(code)) {
-                track.createTracking(code, username, origin, destination, note, this);
-            }
-
-            */
-
-            //submit form
-
             var dataItem = {
-                code: jQuery("#tr-code").html()
-            };
+                username: username,
+                origin: origin,
+                destination: destination,
+                note: note
+            }
+            var data = {};
+            data.Item = dataItem;
 
-            track.resolveItem(dataItem);
-
-
+            if (ID) {
+                track.resolveItem(ID, data, this);
+            }
         });
-
-
-
-
-
-
     });
 
 })(jQuery);

@@ -53,11 +53,18 @@
             <textarea class="form-control tracking-note"><?php echo $detail[0]->note; ?></textarea>
         </div>
         <br>
-
-        <div class="btn-group">
-            <button class="btn btn-primary" id="btn-edit-tracking" data-id="<?php echo $detail[0]->ID; ?>">Lưu</button>
-            <button class="btn btn-danger nav-back" >Hủy</button>
+        
+        <div class="input-group" style="width: 100%">
+            <div class="pull-left">
+                 <button class="btn btn-primary" id="btn-edit-tracking" data-id="<?php echo $detail[0]->ID; ?>">Lưu</button>
+                <button class="btn btn-danger nav-back" >Hủy</button>
+            </div>
+            <div class="pull-right">
+                <button class="btn btn-primary" id="tracking-resolve" data-id="<?php echo $detail[0]->ID; ?>">Hoàn Thành</button>
+            </div>
+            
         </div>
+        
     </div>
     <div id='alert' role="alert">
 

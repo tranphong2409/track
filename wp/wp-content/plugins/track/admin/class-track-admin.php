@@ -319,25 +319,64 @@ class Track_Admin
 
     public function resolve_tracking_item()
     {
+        $return     = array("msg" => "Phát sinh lỗi xin liên hệ admin hoặc thử lại sau!!", "is_error" => true);        
+        $item       = $_POST['Item'];
+        $ID         = $_POST['ID'];
+        
+        if (isset($item) && $item) {
+            global $wpdb;
+            $sql1    = "select t.username, t.code, t.destination, t.origin, t.note, t2.time from {$wpdb->prefix}tracking as t JOIN {$wpdb->prefix}tracking_item AS t2 ON t.code = t2.code AND t.ID = '{$ID}' ORDER BY t2.ID DESC LIMIT 1";
+            $sql2    = "SELECT t1.*, t2.user_email, t2.display_name FROM ($sql1) AS t1 JOIN {$wpdb->prefix}users AS t2 WHERE t2.user_login = '".$item['username']."'";
+            $result  = $wpdb->get_results($sql2);
+            
+            if ($result) {
+                if(empty($result[0]->user_email)){
+                    $return["is_error"]         = true;
+                    $return["msg"]              = "Lỗi không tìm thấy email của user này";
+                } else {
+                    //update status resolve
+                    $data['status']             = 'resolve';
+                    $updated = $wpdb->update('wp_tracking', $data, array('ID' => $ID));
+                    
+                    //send mail
+                    $configmail                 = new stdClass();
+                    $configmail->GUSER          = "info@gocphonho.net";
+                    $configmail->SMTPHOST       = "smtp.zoho.com";
+                    $configmail->GPWD           = "fewa#@%$##$@!$#@%";
+                    $configmail->SMTPSERCURITY  = "tls";
 
-        $configmail = new stdClass();
-        $configmail->GUSER = "info@webandlife.net";
-        $configmail->SMTPHOST = "smtp.zoho.com";
-        $configmail->GPWD = "123456789aA!";
-        $configmail->SMTPSERCURITY = "tls";
+                    $data = array(
+                        'code'                  =>  $result[0]->code,
+                        'destination'           =>  $result[0]->destination,
+                        'origin'                =>  $result[0]->origin,
+                        'time'                  =>  $result[0]->time,
+                        'display_name'          =>  $result[0]->display_name,
+                        'note'                  =>  $result[0]->note
+                    );
 
-        $body = "test by Phuc Nguyen";
-        $return = $this->smtpmailer("nguyenvanphuc0626@gmail.com", $configmail->GUSER, "FOCO TRACKING", "Tracking is resolved", $body, '', $configmail);
-        echo '<pre>';
-        print_r($return);
-        echo '</pre>';
-        exit;
-//        $return = array("msg" => "Vui lòng nhập đầy đủ thông tin", "is_error" => true);
-//        $item = $_POST['Item'];
-//        if (isset($item) && !empty($item)) {
-//            print_r('324 class track admin');exit;
-//        }
-//        wp_send_json($return);
+                    $body                           = $this->loadTemplateMmail('mail',$data);
+                    $subject                        = 'MAXIMUM SOURCING_POD of shipment #'.$data['code'];
+
+                    $sendmail                       = json_decode($this->smtpmailer($result[0]->user_email, $configmail->GUSER, 'FOCO', $subject, $body, '', $configmail));
+                    
+                    $return["link"]                 = admin_url().'admin.php?page=track&layout=detail&id='.$ID;
+                    session_start();
+                    if($sendmail->error){
+                        $return["is_error"]         = false;
+                        $return["msg"]              = $sendmail->message;    
+                        $_SESSION['msg-success']    = 'Cập nhật thông tin thành công';
+                    } else {
+                        $return["is_error"]         = true;
+                        $return["msg"]              = $sendmail->message;    
+                        $_SESSION['msg-success']    = $sendmail->message;
+                    }
+                }                
+            } else {
+                $return["is_error"]                 = true;
+                $return["msg"]                      = "Phát sinh lỗi xin liên hệ admin hoặc thử lại sau";
+            }
+        }
+        wp_send_json($return);
     }
 
     /**
@@ -410,12 +449,6 @@ class Track_Admin
                 $userlist = json_encode($this->getUserList());
                 include_once('partials/track-admin-add-display.php');
                 break;
-            case "resolve":
-                print_r($_POST);exit;
-                $userlist = json_encode($this->getUserList());
-                print_r($userlist);
-                exit;
-                break;
             default:
                 include_once('partials/track-admin-display.php');
         }
@@ -423,44 +456,50 @@ class Track_Admin
     }
     
     public function smtpmailer($to, $from, $from_name, $subject, $body,$attachment='',$configmail)
-        {
-            require_once('../wp-includes/PHPMailer/class.phpmailer.php');
-            require_once('../wp-includes/PHPMailer/class.pop3.php');
-            $mail = new PHPMailer;
-            $mail->CharSet="utf-8";					// bật chức năng SMTP
-            $mail->SMTPDebug = 0;  					// kiểm tra lỗi : 1 là  hiển thị lỗi và thông báo cho ta biết, 2 = chỉ thông báo lỗi
-            $mail->SMTPAuth = true;  				// bật chức năng đăng nhập vào SMTP này
-            
-            $mail->isSMTP();                                      // Set mailer to use SMTP
-            $mail->Host = $configmail->SMTPHOST;  // Specify main and backup SMTP servers
-            $mail->SMTPAuth = true;                               // Enable SMTP authentication
-            $mail->Username = $configmail->GUSER;                 // SMTP username
-            $mail->Password = $configmail->GPWD;                           // SMTP password
-            $mail->SMTPSecure = $configmail->SMTPSERCURITY; 				// sử dụng giao thức SSL vì gmail bắt buộc dùng cái này            
-            $mail->Port = 587;                                    // TCP port to connect to
+    {
+        require_once('../wp-includes/PHPMailer/class.phpmailer.php');
+        require_once('../wp-includes/PHPMailer/class.pop3.php');
+        $mail = new PHPMailer;
+        $mail->CharSet="utf-8";					// bật chức năng SMTP
+        $mail->SMTPDebug = 0;  					// kiểm tra lỗi : 1 là  hiển thị lỗi và thông báo cho ta biết, 2 = chỉ thông báo lỗi
+        $mail->SMTPAuth = true;  				// bật chức năng đăng nhập vào SMTP này
 
-            $mail->From = $from;
-            $mail->FromName = $from_name;
-            $mail->addAddress($to, $from_name);     // Add a recipient
-            //$mail->addAddress('nurettin@a.com');               // Name is optional
-            //$mail->addReplyTo('satis@yandex.com.tr', 'aaa sitesii');
-            //$mail->addCC('cc@example.com');
-            //$mail->addBCC('bcc@example.com');
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+        $mail->Host = $configmail->SMTPHOST;  // Specify main and backup SMTP servers
+        $mail->SMTPAuth = true;                               // Enable SMTP authentication
+        $mail->Username = $configmail->GUSER;                 // SMTP username
+        $mail->Password = $configmail->GPWD;                           // SMTP password
+        $mail->SMTPSecure = $configmail->SMTPSERCURITY; 				// sử dụng giao thức SSL vì gmail bắt buộc dùng cái này            
+        $mail->Port = 587;                                    // TCP port to connect to
 
-            $mail->isHTML(true);                                  // Set email format to HTML
+        $mail->From = $from;
+        $mail->FromName = $from_name;
+        $mail->addAddress($to, $from_name);     // Add a recipient
+        //$mail->addAddress('nurettin@a.com');               // Name is optional
+        //$mail->addReplyTo('satis@yandex.com.tr', 'aaa sitesii');
+        //$mail->addCC('cc@example.com');
+        //$mail->addBCC('bcc@example.com');
 
-            $mail->Subject = $subject;
-            $mail->Body    = $body;
-            $mail->AltBody = $subject;
+        $mail->isHTML(true);                                  // Set email format to HTML
 
-            if(!$mail->send()) {
-                return json_encode(array('error'=>false,'message'=>'Mailer Error: ' . $mail->ErrorInfo));
-            } else {
-                return json_encode(array('error'=>true,'message'=>'Mail Sent Success'));
-            }
+        $mail->Subject = $subject;
+        $mail->Body    = $body;
+        $mail->AltBody = $subject;
 
-
-            
+        if(!$mail->send()) {
+            return json_encode(array('error'=>false,'message'=>'Mailer Error: ' . $mail->ErrorInfo));
+        } else {
+            return json_encode(array('error'=>true,'message'=>'Mail Sent Success'));
         }
+    }
+        
+    private function loadTemplateMmail($template,$data=array()){
+        ob_start();
+        set_query_var('data', $data);        
+        get_template_part('template',$template);
+        $content = ob_get_contents();
+        ob_end_clean();
+        return $content;
+    }
 
 }
