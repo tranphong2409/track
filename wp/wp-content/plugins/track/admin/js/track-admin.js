@@ -203,6 +203,7 @@
                 data: data
             })
                 .done(function (msg) {
+                    jQuery("#no-item").hide();
                     var className = 'alert ';
                     if (msg.is_error) {
                         className += 'alert-danger';

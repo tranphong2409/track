@@ -141,7 +141,7 @@ switch($detail[0]->status){
                 </thead>
                 <tbody>
                 <?php if ($listItem['total'] == 0) { ?>
-                    <tr>
+                    <tr id="no-item">
                         <td colspan="5">Không có thông tin theo dõi</td>
                     </tr>
                 <?php
