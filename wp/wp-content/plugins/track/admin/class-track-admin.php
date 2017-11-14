@@ -336,7 +336,9 @@ class Track_Admin
                 } else {
                     //update status resolve
                     $data['status']             = 'resolve';
-                    $updated = $wpdb->update('wp_tracking', $data, array('ID' => $ID));
+                    $wpdb->update('wp_tracking', $data, array('ID' => $ID));
+                    $item = $wpdb->get_row("SELECT ID FROM {$wpdb->prefix}tracking_item WHERE code = '{$result[0]->code}' ORDER BY id DESC LIMIT 1");
+                    $wpdb->update('wp_tracking_item', $data, array('ID' => $item->ID));
                     
                     //send mail
                     $configmail                 = new stdClass();
