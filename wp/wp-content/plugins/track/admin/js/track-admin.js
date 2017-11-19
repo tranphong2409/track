@@ -260,7 +260,7 @@
             todayBtn: 1,
             autoclose: 1,
             todayHighlight: 1,
-            minuteStep: 2,
+            minuteStep: 1,
             startView: 2,
             forceParse: 0,
             format: "dd-mm-yyyy hh:ii",
