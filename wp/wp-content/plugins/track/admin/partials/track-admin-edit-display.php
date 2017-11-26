@@ -32,7 +32,14 @@
 
         <div class="input-group username-box">
             <span class="input-group-addon">username: </span>
-            <input type="text" class="form-control tracking-username" value="<?php echo $detail[0]->username; ?>"/>
+            <select   class="form-control tracking-username">
+                <?php
+                foreach($userlist as $u){
+                    $selected = $detail[0]->username === $u->user_login ? "selected" : "";
+                    echo  " <option value=".$u->user_login." ".$selected.">".$u->user_nicename."</option>";
+                }
+                ?>
+            </select>
         </div>
         <br>
 

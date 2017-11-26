@@ -34,7 +34,13 @@
 
         <div class="input-group username-box">
             <span class="input-group-addon">username: </span>
-            <input type="text" class="form-control new-tracking-username typeahead" value=""/>
+            <select  class="form-control new-tracking-username typeahead">
+                <?php
+                    foreach($userlist as $u){
+                      echo  " <option value=".$u->user_login.">".$u->user_nicename."</option>";
+                    }
+                ?>
+            </select>
         </div>
         <br>
 

@@ -416,7 +416,7 @@ class Track_Admin
     private function getUserList()
     {
         global $wpdb;
-        $sql = 'SELECT u.user_login FROM wp_users as u ';
+        $sql = 'SELECT u.user_login, u.user_nicename FROM wp_users as u ';
         $results = $wpdb->get_results($sql);
         return $results;
     }
@@ -445,10 +445,11 @@ class Track_Admin
             case "edit":
                 $id = $_REQUEST["id"];
                 $detail = $this->getTrackingDetail($id);
+                $userlist = $this->getUserList();
                 include_once('partials/track-admin-edit-display.php');
                 break;
             case "add":
-                $userlist = json_encode($this->getUserList());
+                $userlist = $this->getUserList();
                 include_once('partials/track-admin-add-display.php');
                 break;
             default:
