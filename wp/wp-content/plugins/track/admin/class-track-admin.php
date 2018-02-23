@@ -117,6 +117,7 @@ class Track_Admin
 
         wp_enqueue_script($this->plugin_name. '-bootstrap', plugin_dir_url(__FILE__) . 'js/bootstrap.min.js', array('jquery'), $this->version, false);
         wp_enqueue_script($this->plugin_name. '-datetime', plugin_dir_url(__FILE__) . 'js/bootstrap-datetimepicker.min.js', array('jquery'), $this->version, false);
+        wp_enqueue_script($this->plugin_name. '-date', plugin_dir_url(__FILE__) . 'js/bootstrap-datepicker.min.js', array('jquery'), $this->version, false);
         wp_enqueue_script($this->plugin_name.'-custom', plugin_dir_url(__FILE__) . 'js/track-admin.js', array('jquery'), $this->version, false);
         wp_enqueue_script($this->plugin_name . 'popup', '/wp-content/themes/enfold/js/aviapopup/jquery.magnific-popup.min.js', array('jquery'), $this->version, false);
 
@@ -222,11 +223,13 @@ class Track_Admin
             $exist = $this->check_exist($code,true);
             if (!$exist) {
                 global $wpdb;
+                date_default_timezone_set("Asia/Bangkok");
                 $result = $wpdb->insert('wp_tracking', array(
                     'code' => $code,
                     'username' => $username,
                     'origin' => $origin,
-                    'destination' => $destination
+                    'destination' => $destination,
+                    'created_date'  =>  date("Y-m-d")
                 ), array('%s', '%s'));
                 if ($result) {
                     $return["msg"] = "Đã thêm mới";
