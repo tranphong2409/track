@@ -1,0 +1,1 @@
+ALTER TABLE `wp_tracking` ADD `created_date` DATE NOT NULL AFTER `update_time`;

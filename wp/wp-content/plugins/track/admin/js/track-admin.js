@@ -266,6 +266,34 @@
             format: "dd-mm-yyyy hh:ii",
             showMeridian: 1
         });
+        
+        jQuery('#beginTime').datepicker({
+            format: 'dd-mm-yyyy',
+            autoclose: 1,
+            todayHighlight: 1,
+        });
+        jQuery('#endTime').datepicker({
+            format: 'dd-mm-yyyy',
+            autoclose: 1,
+            todayHighlight: 1,
+        });
+        jQuery("#filterDate").on('click',function(){
+            var beginTime       = $("#beginTime").val();
+            var endTime         = $("#endTime").val();
+
+            if(beginTime == ""){
+                alert("Vui lòng chọn thời điểm bắt đầu");return false;
+            }
+            
+            if(endTime == ""){
+                alert("Vui lòng chọn thời điểm kết thúc");return false;
+            }
+            
+            window.location.href = location.href  + '&beginTime='+beginTime + '&endTime='+endTime;
+            return false;
+        });
+        
+
         jQuery('.nav-back').click(function () {
             track.goBack();
         });

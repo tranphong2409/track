@@ -20,7 +20,10 @@
         <div id="post-body" class="metabox-holder columns-2">
             <div id="post-body-content">
                 <div class="meta-box-sortables ui-sortable">
-                    <form method="post">
+                    <form method="post" style="width:110%">
+                        <input type="text" name="beginTime" value="<?php echo (isset($_REQUEST['beginTime']))?$_REQUEST['beginTime']:''?>" id="beginTime" class="time hasDatepicker" placeholder="Chọn ngày bắt đầu">
+                        <input type="text" name="endTime" value="<?php echo (isset($_REQUEST['endTime']))?$_REQUEST['endTime']:''?>" id="endTime" class="time hasDatepicker" placeholder="Chọn ngày kết thúc">
+                        <button id="filterDate" type="submit" name="submit" value="filter" class="btn btn-primary btn-sm btn-update">Tìm</button>    
                         <?php
                         $this->tracks_obj->prepare_items();
                         $this->tracks_obj->display(); ?>

@@ -34,6 +34,14 @@ class Tracks_List extends WP_List_Table
         global $wpdb;
 
         $sql = "SELECT * FROM {$wpdb->prefix}tracking";
+        
+        if (!empty($_REQUEST['beginTime'])) {
+            $sql .= ' WHERE created_date >= "' . esc_sql(date("Y-m-d",strtotime($_REQUEST['beginTime']))).'"';
+        }
+        
+        if (!empty($_REQUEST['endTime'])) {
+            $sql .= ' AND created_date <= "' . esc_sql(date("Y-m-d",strtotime($_REQUEST['endTime']))).'"';
+        }
 
         if (!empty($_REQUEST['orderby'])) {
             $sql .= ' ORDER BY ' . esc_sql($_REQUEST['orderby']);
@@ -78,6 +86,14 @@ class Tracks_List extends WP_List_Table
 
         $sql = "SELECT COUNT(*) FROM {$wpdb->prefix}tracking";
 
+        if (!empty($_REQUEST['beginTime'])) {
+            $sql .= ' WHERE created_date >= ' . esc_sql($_REQUEST['beginTime']);
+        }
+        
+        if (!empty($_REQUEST['endTime'])) {
+            $sql .= ' WHERE created_date <= ' . esc_sql($_REQUEST['endTime']);
+        }
+        
         return $wpdb->get_var($sql);
     }
 
@@ -107,6 +123,7 @@ class Tracks_List extends WP_List_Table
             case 'status':
             case 'username':
             case 'note':
+            case 'created_date':
                 return $item[$column_name];
             default:
                 return print_r($item, true); //Show the whole array for troubleshooting purposes
@@ -165,7 +182,8 @@ class Tracks_List extends WP_List_Table
             'origin' => __('Origin', 'sp'),
             'destination' => __('Destination', 'sp'),
             'status' => __('Status', 'sp'),
-            'note' => __('Note', 'sp')
+            'note' => __('Note', 'sp'),
+            'created_date' => __('Created date', 'sp')
         ];
 
         return $columns;
@@ -277,6 +295,9 @@ class Tracks_List extends WP_List_Table
                             break;
                         case "note":
                             echo '<td ' . $attributes . '>' . $rec['note'] . '</td>';
+                            break;
+                        case "created_date":
+                            echo '<td ' . $attributes . '>' . date("d-m-Y",strtotime($rec['created_date'])) . '</td>';    
                             break;
                     }
                 }
