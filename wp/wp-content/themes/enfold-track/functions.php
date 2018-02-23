@@ -56,15 +56,24 @@ function get_zone(){
 function slideshow_shortcode() {
     $zones = get_zone();
     $zone_option= '';
+    $sLang = pll_current_language();
+    $sUrlLink = "/track-and-trace/";
+    if($sLang === "vi"){
+        $sUrlLink = "/vi/tra-cuu/";
+    }
+    // echo pll_current_language();die();
     foreach($zones as $zone){
         $zone_option .= '<option value="'.$zone->name.'">'.$zone->name.'</option>';
     }
     return '
         <div class="track">
-            <button>'.__("Track & Trace").'</button>
+
+            <button onClick="jQuery(\'#traceForm\').submit();">'.__("Track & Trace").'</button>
+        <form id="traceForm" action="'.$sUrlLink.'" method="get">
             <div class="input-field">
-                <input class="text-box" type="text" placeholder="'.__("Enter your tracking number").'" />
+                <input class="text-box" type="text" name="code" placeholder="'.__("Enter your tracking number").'" />
             </div>
+            </form>
         </div>
         <div class="quote" >
             <form action="" id="quote-form">
@@ -296,7 +305,7 @@ add_action( 'save_post', 'sm_meta_save' );
 
 function vcomment_list_func( $atts ) {
     $a = shortcode_atts( array(
-        'id' => [8,9],
+        'id' => array(8,9),
     ), $atts );
     $args = array(
         'posts_per_page'   => 5,

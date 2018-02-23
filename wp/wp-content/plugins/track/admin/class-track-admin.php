@@ -58,7 +58,12 @@ class Track_Admin
 
         $this->plugin_name = $plugin_name;
         $this->version = $version;
-        add_filter('set-screen-option', [__CLASS__, 'set_screen'], 10, 3);
+        $array = array(
+            __CLASS__,
+           'set_screen'
+        );
+
+        add_filter('set-screen-option', $array, 10, 3);
     }
 
     /**
@@ -136,7 +141,7 @@ class Track_Admin
          */
         $hook = add_menu_page('Manage Tracking', 'Tracking', 'manage_options', $this->plugin_name, array($this, 'display_plugin_setup_page'), "", 3
         );
-        add_action("load-$hook", [$this, 'screen_option']);
+        add_action("load-$hook", array($this, 'screen_option'));
     }
 
     /**
@@ -146,11 +151,11 @@ class Track_Admin
     {
 
         $option = 'per_page';
-        $args = [
+        $args = array(
             'label' => 'Tracks',
             'default' => 15,
             'option' => 'track_per_page'
-        ];
+        );
 
         add_screen_option($option, $args);
 
@@ -426,14 +431,14 @@ class Track_Admin
         $sql = 'SELECT * FROM wp_tracking_item WHERE code like "' . trim($code) . '"';
         $results = $wpdb->get_results($sql);
         $total = count($results);
-        $data = [ "total"=> $total, "lists"=> $results ];
+        $data =  array("total"=> $total, "lists"=> $results);
         return $data;
     }
 
     public function display_plugin_setup_page()
     {
         $detail = null;
-        $listItem = [];
+        $listItem = array();
         $this->layout = $_REQUEST["layout"];
         switch ($this->layout) {
             case "detail":

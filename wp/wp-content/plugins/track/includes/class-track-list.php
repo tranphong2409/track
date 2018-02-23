@@ -11,11 +11,11 @@ class Tracks_List extends WP_List_Table
     public function __construct()
     {
 
-        parent::__construct([
+        parent::__construct(array(
             'singular' => __('Track', 'sp'), //singular name of the listed records
             'plural' => __('Tracks', 'sp'), //plural name of the listed records
             'ajax' => false //does this table support ajax?
-        ]);
+        ));
 
     }
 
@@ -61,8 +61,8 @@ class Tracks_List extends WP_List_Table
 
         $wpdb->delete(
             "{$wpdb->prefix}tracking",
-            ['ID' => $id],
-            ['%d']
+            array('ID' => $id),
+            array('%d')
         );
     }
 
@@ -142,9 +142,9 @@ class Tracks_List extends WP_List_Table
 
         $title = '<strong>' . $item['name'] . '</strong>';
 
-        $actions = [
+        $actions = array(
             'delete' => sprintf('<a href="?page=%s&action=%s&track=%s&_wpnonce=%s">Delete</a>', esc_attr($_REQUEST['page']), 'delete', absint($item['ID']), $delete_nonce)
-        ];
+        );
 
         return $title . $this->row_actions($actions);
     }
@@ -157,7 +157,7 @@ class Tracks_List extends WP_List_Table
      */
     function get_columns()
     {
-        $columns = [
+        $columns = array(
             'cb' => '<input type="checkbox" />',
             'ID' => __('ID', 'sp'),
             'code' => __('Code', 'sp'),
@@ -166,7 +166,7 @@ class Tracks_List extends WP_List_Table
             'destination' => __('Destination', 'sp'),
             'status' => __('Status', 'sp'),
             'note' => __('Note', 'sp')
-        ];
+        );
 
         return $columns;
     }
@@ -195,9 +195,9 @@ class Tracks_List extends WP_List_Table
      */
     public function get_bulk_actions()
     {
-        $actions = [
+        $actions = array(
             'bulk-delete' => 'Delete'
-        ];
+        );
 
         return $actions;
     }
@@ -218,10 +218,10 @@ class Tracks_List extends WP_List_Table
         $current_page = $this->get_pagenum();
         $total_items = self::record_count();
 
-        $this->set_pagination_args([
+        $this->set_pagination_args(array(
             'total_items' => $total_items, //WE have to calculate the total number of items
             'per_page' => $per_page //WE have to determine how many items to show on a page
-        ]);
+        ));
 
         $this->items = self::get_Tracks($per_page, $current_page);
     }
