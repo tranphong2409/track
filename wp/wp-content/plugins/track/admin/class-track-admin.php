@@ -89,7 +89,8 @@ class Track_Admin
         if ($page == 'track') {
             wp_enqueue_style($this->plugin_name . '-bootstrap', plugin_dir_url(__FILE__) . 'css/bootstrap.min.css', array(), $this->version, 'all');
             wp_enqueue_style($this->plugin_name . '-theme', plugin_dir_url(__FILE__) . 'css/bootstrap-theme.min.css', array(), $this->version, 'all');
-            wp_enqueue_style($this->plugin_name . '-datetime', plugin_dir_url(__FILE__) . 'css/bootstrap-datetimepicker.min.css', array(), $this->version, 'all');
+//            wp_enqueue_style($this->plugin_name . '-datetime', plugin_dir_url(__FILE__) . 'css/bootstrap-datetimepicker.min.css', array(), $this->version, 'all');
+            wp_enqueue_style($this->plugin_name . '-jdatetime', plugin_dir_url(__FILE__) . 'css/jquery.datetimepicker.min.css', array(), $this->version, 'all');
         }
         wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/track-admin.css', array(), $this->version, 'all');
         wp_enqueue_style($this->plugin_name . 'popup', '/wp-content/themes/enfold/js/aviapopup/magnific-popup.css', array(), $this->version, 'all');
@@ -116,8 +117,9 @@ class Track_Admin
          */
 
         wp_enqueue_script($this->plugin_name. '-bootstrap', plugin_dir_url(__FILE__) . 'js/bootstrap.min.js', array('jquery'), $this->version, false);
-        wp_enqueue_script($this->plugin_name. '-datetime', plugin_dir_url(__FILE__) . 'js/bootstrap-datetimepicker.min.js', array('jquery'), $this->version, false);
+//        wp_enqueue_script($this->plugin_name. '-datetime', plugin_dir_url(__FILE__) . 'js/bootstrap-datetimepicker.min.js', array('jquery'), $this->version, false);
         wp_enqueue_script($this->plugin_name. '-date', plugin_dir_url(__FILE__) . 'js/bootstrap-datepicker.min.js', array('jquery'), $this->version, false);
+        wp_enqueue_script($this->plugin_name. '-jdatetime', plugin_dir_url(__FILE__) . 'js/jquery.datetimepicker.full.min.js', array('jquery'), $this->version, false);
         wp_enqueue_script($this->plugin_name.'-custom', plugin_dir_url(__FILE__) . 'js/track-admin.js', array('jquery'), $this->version, false);
         wp_enqueue_script($this->plugin_name . 'popup', '/wp-content/themes/enfold/js/aviapopup/jquery.magnific-popup.min.js', array('jquery'), $this->version, false);
 
@@ -365,7 +367,7 @@ class Track_Admin
                     );
 
                     $body                           = $this->loadTemplateMmail('mail',$data);
-                    $subject                        = 'MAXIMUM SOURCING_POD of shipment #'.$data['code'];
+                    $subject                        = $data['display_name'].'_POD of shipment #'.$data['code'];
 
                     $sendmail                       = json_decode($this->smtpmailer($result[0]->user_email, $configmail->GUSER, 'FOCO', $subject, $body, '', $configmail));
                     

@@ -156,7 +156,7 @@ function track_shortcode() {
     $info = getTrackingDetailItem($code);
     
     if(!isset($code) || empty($info)){
-        return "";
+        return "We didn't find any matches for shipment number ".$code.". Please check your tracking number.";
     }
     
     $data = array(

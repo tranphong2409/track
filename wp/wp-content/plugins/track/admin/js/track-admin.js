@@ -255,18 +255,16 @@
 
     $(function () {
         //init datetime picker
-        jQuery('.form_datetime').datetimepicker({
-            weekStart: 1,
-            todayBtn: 1,
-            autoclose: 1,
-            todayHighlight: 1,
-            minuteStep: 1,
-            startView: 2,
-            forceParse: 0,
-            format: "dd-mm-yyyy hh:ii",
-            showMeridian: 1
+        jQuery('.form_datetime .timereadonly').datetimepicker({
+            lang: "vi",            
+            step: 1,
+            format: "d-m-Y H:i",
+            formatDate:'d-m-Y',
+            formatTime:'H:i'
         });
-        
+        jQuery('.glyphicon-th').click(function(){
+            jQuery('.form_datetime .timereadonly').datetimepicker('show');
+        });
         jQuery('#beginTime').datepicker({
             format: 'dd-mm-yyyy',
             autoclose: 1,
@@ -448,6 +446,8 @@
         $('button.popup-link').magnificPopup({
             items: {
                 src: '#popup',
+                alignTop: true,
+                fixedContentPos: false,
                 type: 'inline'
             },
             callbacks: {

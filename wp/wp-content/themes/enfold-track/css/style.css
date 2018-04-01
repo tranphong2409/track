@@ -3734,7 +3734,7 @@ The `sprites` mixin generates identical output to the CSS template
   padding: 20px 10px;
 }
 
-#header #main-menu .mm-container li a:hover, #header #main-menu .mm-container li a.active, #header #main-menu .mm-container li.current-menu-item a {
+#header #main-menu .mm-container li a:hover, #header #main-menu .mm-container li a.active, #header #main-menu .mm-container li.current-menu-item > a {
   text-decoration: none;
   color: white;
   text-shadow: 1px 1px #3d414c;

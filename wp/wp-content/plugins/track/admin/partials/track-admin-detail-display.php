@@ -130,6 +130,19 @@ switch ($detail[0]->status) {
                                 </div>
                             </div>
                         </li>
+                        <li>
+                            <div class="av-catalogue-item">
+                                <div class="av-catalogue-item-inner">
+                                    <div class="av-catalogue-title-container">
+                                        <div class="av-catalogue-title">Note</div>
+                                        <div class="av-catalogue-price"></div>
+                                    </div>
+                                    <div class="av-catalogue-content">
+                                        <em><strong><?php echo $detail[0]->note; ?></strong></em><br>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -192,10 +205,10 @@ switch ($detail[0]->status) {
         <div class="row insert">
             <div class="input-group date form_datetime">
                 <span class="input-group-addon">Thời gian: </span>
-                <input class="form-control timereadonly" type="text" value="" readonly>
-                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                <input class="form-control timereadonly time" type="text" value="" readonly>
+                <!--<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>-->
                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                <input type="hidden" id="dtp_input1" class="time" value=""/>
+                <!--<input type="hidden" id="dtp_input1" class="time" value=""/>-->
             </div>
             <div class="input-group location-box"><span class="input-group-addon lefttit">Địa điểm: </span><input
                     type="text" value=""

@@ -19,6 +19,17 @@
 	.responsive #scroll-top-link{display: block;}
 	#commentform label{left:0;position: relative;padding-bottom:5px;}
     #header_meta{background: #fff;}
+    #header .mega_menu_title{display:none;}
+    #header #main-menu .mm-container .sub-menu li a {
+    color: #000;
+}
+#top #header .avia_mega_div > .sub-menu {
+    padding: 10px 20px 20px;
+}
+#header #main-menu .mm-container li a {    padding: 20px 5.5px;}
+#mobile-advanced .mega_menu_title {
+    display: none;
+}
 #header .top-menu ul{margin:0;}
 #header .header-information li p{line-height: 20px;font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;}
 #header_main,#header_meta, #header_main_alternate, .avia-section{border: 0 none;}
@@ -37,6 +48,15 @@
 #slideshow.front .track-box .quote button{text-indent: 4.5px;}
 #slideshow.front{background-attachment: fixed; background-size: cover;}
 h2.av-special-heading-tag{font-weight: bold !important; }
+.service-des{float:left;}
+#top .bg-gray h2.av-special-heading-tag {
+    color: #fff;
+}
+.bg-gray {
+    background: #000;
+    color: #fff;
+    padding: 10px;
+}
 .u-border .special-heading-border{display: block !important;}
 .u-border .special-heading-border .special-heading-inner-border{border-width:2px;margin: 0; opacity: 1; }
 #services-box {background: #fab804;}

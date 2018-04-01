@@ -1,11 +1,21 @@
+                                <?php 
+                                $sLang = pll_current_language();
+    $sUrlLink = "/track-and-trace/";
+    if($sLang === "vi"){
+        $sUrlLink = "/vi/tra-cuu/";
+    }
+    
+                                ?>
 <div class="flex_column av_one_third first  avia-builder-el-6  el_after_av_hr  el_before_av_two_third  ">
     <section class="avia_codeblock_section avia_code_block_1" itemscope="itemscope" itemtype="https://schema.org/CreativeWork">
         <div class="avia_codeblock track-searchbox" itemprop="text">
             <div class="track">
-                <button>Track & Trace</button>
+                <button onClick="jQuery('#traceForm').submit();">Track & Trace</button>
+                <form id="traceForm" action="<?php echo $sUrlLink; ?>" method="get">
                 <div class="input-field">
-                    <input class="text-box" type="text" placeholder="<?php echo $data['code']; ?>">
+                    <input class="text-box" type="text" name="code" placeholder="<?php echo $data['code']; ?>">
                 </div>
+                </form>
             </div>
         </div>
     </section>
@@ -79,6 +89,20 @@
                     </div>
                 </div>
             </li>
+            <li>
+                <div class="av-catalogue-item">
+                    <div class="av-catalogue-item-inner">
+                        <div class="av-catalogue-title-container">
+                            <div class="av-catalogue-title">Note</div>
+                            <div class="av-catalogue-price"></div>
+                        </div>
+                        <div class="av-catalogue-content">
+                            <em><strong><?php echo $data['info'][0]->note; ?></strong></em>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </li>
         </ul>
     </div>
 </div>
@@ -101,7 +125,7 @@
                                     $style = "background-color:#d54e21;";
                                     $status = "Lỗi";break;
                                 case "resolve":
-                                    $icon = "";
+                                    $icon = "";
                                     $style  = "background-color:#fab704;";
                                     $status = "Hoàn thành";break;
                                 default:
