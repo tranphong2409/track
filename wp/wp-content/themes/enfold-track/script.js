@@ -65,4 +65,9 @@ jQuery(document).ready(function($) {
 
 
     }
+    if(jQuery("#scrolltoid").length > 0){
+        jQuery('html, body').animate({
+            scrollTop: jQuery("#scrolltoid").offset().top
+        }, 2000);
+     }   
 });

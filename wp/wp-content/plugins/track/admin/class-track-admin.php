@@ -345,7 +345,7 @@ class Track_Admin
                     $return["msg"]              = "Lỗi không tìm thấy email của user này";
                 } else {
                     //update status resolve
-                    $data['status']             = 'resolve';
+                    $data['status']             = 'Resolve';
                     $wpdb->update('wp_tracking', $data, array('ID' => $ID));
                     $item = $wpdb->get_row("SELECT ID FROM {$wpdb->prefix}tracking_item WHERE code = '{$result[0]->code}' ORDER BY id DESC LIMIT 1");
                     $wpdb->update('wp_tracking_item', $data, array('ID' => $item->ID));

@@ -150,3 +150,5 @@ div#alert {
 .check-code{
     cursor: pointer;
 }
+
+#wp-admin-bar-wp-logo{display:none;}

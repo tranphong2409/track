@@ -170,8 +170,8 @@ switch ($detail[0]->status) {
                             <td><span class="time"><?php echo $e->time; ?></span></td>
                             <td><span class="location"><?php echo $e->location; ?></span></td>
                             <td><span class="note"><?php echo $e->note; ?></span></td>
-                            <td><span class="status"><?php echo($e->status == 'process' ? 'Đang tiến hành' : '');
-                                    echo($e->status == 'error' ? 'Lỗi' : ''); ?></span></td>
+                            <td><span class="status"><?php echo($e->status == 'process' ? 'In Process' : '');
+                                    echo($e->status == 'error' ? 'Error' : ''); ?></span></td>
                             <?php if (!$resolve_status): ?>
                                 <td>
                                     <button class="btn btn-primary btn-sm btn-update">Sửa</button>
@@ -253,8 +253,8 @@ switch ($detail[0]->status) {
             <div class="input-group status-box">
                 <span class="input-group-addon lefttit">Trạng thái: </span>
                 <select class="form-control status">
-                    <option value="process">Đang tiến hành</option>
-                    <option value="error">Lỗi</option>
+                    <option value="process">In Process</option>
+                    <option value="error">Error</option>
                 </select>
             </div>
             <div class="btn-group">
